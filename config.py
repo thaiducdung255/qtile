@@ -262,7 +262,7 @@ def init_widgets_list():
 
         widget.Spacer(length = bar.STRETCH),
         widget.Battery(discharge_char = "-", charge_char = "+",
-            format = "Bat: {char} {percent:2.0%}  [ {hour:d}:{min:02d} ]",
+            format = "Bat: {char} {percent:2.0%} ( {hour:d}:{min:02d} )",
             padding = 5
             ),
         widget.Sep(linewidth = 0, padding = 7),
@@ -278,7 +278,7 @@ def init_widgets_list():
         widget.Volume(padding = 5),
         widget.Sep(linewidth = 0, padding = 7),
 
-        widget.Clock(format = "%a, %d/%m/%y  [ %H:%M ]"),
+        widget.Clock(format = "%a, %d/%m ( %H:%M )"),
         widget.Sep(linewidth = 0, padding = 7),
 
         widget.CurrentLayout(padding = 5),
