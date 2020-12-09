@@ -170,16 +170,6 @@ keys = [
         desc='Dim screen'
         ),
 
-    ### Screenshot
-    Key([super_mod], "c",
-        lazy.spawn("sleep 1;maim -su | xclip -selection clipboard -t image/png -i"),
-        desc='Take screenshot of an area'
-        ),
-    Key([super_mod, "shift"], "c",
-        lazy.spawn("sleep 1;maim -u | xclip -selection clipboard -t image/png -i"),
-        desc='Take screenshot of window'
-        ),
-
     ### Power control
     Key([super_mod], "x",
         lazy.spawn("xscreensaver-command -l"),
