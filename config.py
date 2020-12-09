@@ -22,7 +22,7 @@ keys = [
         desc='Launches My Terminal'
         ),
     Key([mod], "Escape",
-        lazy.spawn("dmenu_run -p '>' -fn 'Ubuntu Mono:pixelsize=18' -c -l 20"),
+        lazy.spawn("dmenu_run -p '>' -fn 'Monospace:pixelsize=18' -c -l 20"),
         desc='Dmenu Run Launcher'
         ),
     Key([mod], "b",
@@ -182,14 +182,14 @@ keys = [
 ]
 
 group_names = [
-    ("[ Jason ]", {'layout': 'monadtall'}),
-    ("[ Kratos ]", {'layout': 'monadtall'}),
-    ("[ Loki ]", {'layout': 'monadtall'}),
-    ("[ Scylla ]", {'layout': 'monadtall'}),
-    ("[ Uranus ]", {'layout': 'monadtall'}),
-    ("[ Iris ]", {'layout': 'monadtall'}),
-    ("[ Odin ]", {'layout': 'monadtall'}),
-    ("[ Paris ]", {'layout': 'monadtall'})]
+    ("[Jason]", {'layout': 'monadtall'}),
+    ("[Kratos]", {'layout': 'monadtall'}),
+    ("[Loki]", {'layout': 'monadtall'}),
+    ("[Scylla]", {'layout': 'monadtall'}),
+    ("[Uranus]", {'layout': 'monadtall'}),
+    ("[Iris]", {'layout': 'monadtall'}),
+    ("[Odin]", {'layout': 'monadtall'}),
+    ("[Paris]", {'layout': 'monadtall'})]
 
 group_keys = {
     "1": "j",
@@ -244,8 +244,8 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.GroupBox(
-            margin_y = 4,
-            margin_x = 10,
+            margin_y = 5,
+            margin_x = 5,
             padding_y = 2,
             padding_x = 0,
             borderwidth = 3,
@@ -265,14 +265,14 @@ def init_widgets_list():
 
         widget.Spacer(length = bar.STRETCH),
         widget.Battery(discharge_char = "-", charge_char = "+",
-            format = "Bat: {char} {percent:2.0%} ({hour:d}:{min:02d})",
+            format = "Bat: {char}{percent:2.0%} ({hour:d}:{min:02d})",
             padding = 5
             ),
         widget.Sep(linewidth = 0, padding = 7),
 
         widget.Wlan(
             interface = "wlp0s20f3",
-            disconnected_message = "N/A",
+            disconnected_message = "Wifi: N/A",
             format = "Wifi: {essid}",
             padding = 5),
         widget.Sep(linewidth = 0, padding = 7),
@@ -281,7 +281,7 @@ def init_widgets_list():
         widget.Volume(padding = 5),
         widget.Sep(linewidth = 0, padding = 7),
 
-        widget.Clock(format = "%a, %d/%m (%H:%M)"),
+        widget.Clock(format = "%a, %H:%M (%d/%m)"),
         widget.Sep(linewidth = 0, padding = 7),
 
         widget.CurrentLayout(padding = 5),
