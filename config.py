@@ -22,8 +22,8 @@ keys = [
         desc='Launches My Terminal'
         ),
     Key([mod], "Escape",
-        lazy.spawn("dmenu_run -p '>' -fn 'Ubuntu Mono:pixelsize=18' -c -l 20"),
-        desc='Dmenu Run Launcher'
+        lazy.spawn("rofi -show drun"),
+        desc='Rofi show running applications'
         ),
     Key([mod], "b",
         lazy.spawn("brave"),
@@ -79,6 +79,7 @@ keys = [
         ),
     Key([mod, "shift"], "l",
         lazy.layout.swap_right(),
+        lazy.layout.left(),
         desc='Move windows right in current stack'
         ),
     Key([mod, "shift"], "j",
