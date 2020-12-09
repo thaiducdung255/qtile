@@ -1,5 +1,5 @@
 #! /bin/bash
 ibus-daemon &
-xmodmap ~/.init-scripts/xmodmap &
+xmodmap $HOME/.config/qtile/.init-scripts/xmodmap &
 xscreensaver -nosplash &
-source ~/.init-scripts/enable-touchpad-click.sh &
+source $HOME/.config/qtile/.init-scripts/enable-touchpad-click.sh &

@@ -37,14 +37,17 @@ keys = [
         lazy.window.kill(),
         desc='Kill active window'
         ),
-    Key([mod, "shift"], "r",
+    Key([mod], "r",
         lazy.restart(),
-        lazy.spawn("xmodmap " + qtile_dir + "/.init-scripts/xmodmap"),
         desc='Restart Qtile'
         ),
     Key([mod, "shift"], "q",
         lazy.shutdown(),
         desc='Shutdown Qtile'
+        ),
+    Key([super_mod], "r",
+        lazy.spawn("xmodmap " + qtile_dir + "/.init-scripts/xmodmap"),
+        desc='restore xmodmap'
         ),
 
     ### Switch focus of monitors
@@ -167,6 +170,16 @@ keys = [
         desc='Dim screen'
         ),
 
+    ### Screenshot
+    Key([super_mod], "c",
+        lazy.spawn("sleep 1;maim -su | xclip -selection clipboard -t image/png -i"),
+        desc='Take screenshot of an area'
+        ),
+    Key([super_mod, "shift"], "c",
+        lazy.spawn("sleep 1;maim -u | xclip -selection clipboard -t image/png -i"),
+        desc='Take screenshot of window'
+        ),
+
     ### Power control
     Key([super_mod], "x",
         lazy.spawn("xscreensaver-command -l"),
@@ -262,7 +275,7 @@ def init_widgets_list():
 
         widget.Spacer(length = bar.STRETCH),
         widget.Battery(discharge_char = "-", charge_char = "+",
-            format = "Bat: {char} {percent:2.0%} ( {hour:d}:{min:02d} )",
+            format = "Bat: {char} {percent:2.0%} ({hour:d}:{min:02d})",
             padding = 5
             ),
         widget.Sep(linewidth = 0, padding = 7),
@@ -278,7 +291,7 @@ def init_widgets_list():
         widget.Volume(padding = 5),
         widget.Sep(linewidth = 0, padding = 7),
 
-        widget.Clock(format = "%a, %d/%m ( %H:%M )"),
+        widget.Clock(format = "%a, %d/%m (%H:%M)"),
         widget.Sep(linewidth = 0, padding = 7),
 
         widget.CurrentLayout(padding = 5),
