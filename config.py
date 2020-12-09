@@ -22,7 +22,7 @@ keys = [
         desc='Launches My Terminal'
         ),
     Key([mod], "Escape",
-        lazy.spawn("dmenu_run -p '>' -fn 'Monospace:pixelsize=18' -c -l 20"),
+        lazy.spawn("dmenu_run -p '>' -fn 'Ubuntu Mono:pixelsize=18' -c -l 20"),
         desc='Dmenu Run Launcher'
         ),
     Key([mod], "b",
@@ -245,7 +245,7 @@ def init_widgets_list():
     widgets_list = [
         widget.GroupBox(
             margin_y = 5,
-            margin_x = 5,
+            margin_x = 10,
             padding_y = 2,
             padding_x = 0,
             borderwidth = 3,
