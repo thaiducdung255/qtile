@@ -22,7 +22,7 @@ keys = [
         desc='Launches My Terminal'
         ),
     Key([mod], "Escape",
-        lazy.spawn("rofi -show drun"),
+        lazy.spawn("rofi -show drun -display-drun \"Apps\" -display-run \"Cmd\" -display-window \"Windows\""),
         desc='Rofi show running applications'
         ),
     Key([mod], "b",
