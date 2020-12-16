@@ -183,14 +183,14 @@ keys = [
 ]
 
 group_names = [
-    ("[Jason]", {'layout': 'monadtall'}),
-    ("[Kratos]", {'layout': 'monadtall'}),
-    ("[Loki]", {'layout': 'monadtall'}),
-    ("[Scylla]", {'layout': 'monadtall'}),
-    ("[Uranus]", {'layout': 'monadtall'}),
-    ("[Iris]", {'layout': 'monadtall'}),
-    ("[Odin]", {'layout': 'monadtall'}),
-    ("[Paris]", {'layout': 'monadtall'})]
+    ("[J]", {'layout': 'monadtall'}),
+    ("[K]", {'layout': 'monadtall'}),
+    ("[L]", {'layout': 'monadtall'}),
+    ("[S]", {'layout': 'monadtall'}),
+    ("[U]", {'layout': 'monadtall'}),
+    ("[I]", {'layout': 'monadtall'}),
+    ("[O]", {'layout': 'monadtall'}),
+    ("[P]", {'layout': 'monadtall'})]
 
 group_keys = {
     "1": "j",
@@ -266,27 +266,27 @@ def init_widgets_list():
 
         widget.Spacer(length = bar.STRETCH),
         widget.Battery(discharge_char = "-", charge_char = "+",
-            format = "Bat: {char}{percent:2.0%} ({hour:d}:{min:02d})",
+            format = "{char}{percent:2.0%} ({hour:d}:{min:02d})",
             padding = 5
             ),
         widget.Sep(linewidth = 0, padding = 7),
 
         widget.Wlan(
             interface = "wlp0s20f3",
-            disconnected_message = "Wifi: N/A",
-            format = "Wifi: {essid}",
+            disconnected_message = "W: N/A",
+            format = "W: {essid}",
             padding = 5),
         widget.Sep(linewidth = 0, padding = 7),
 
-        widget.TextBox(text = "Vol:"),
+        widget.TextBox(text = "V:"),
         widget.Volume(padding = 5),
         widget.Sep(linewidth = 0, padding = 7),
 
         widget.Clock(format = "%a, %H:%M (%d/%m)"),
         widget.Sep(linewidth = 0, padding = 7),
 
-        widget.CurrentLayout(padding = 5),
-        widget.Sep(linewidth = 0, padding = 7),
+        # widget.CurrentLayout(padding = 5),
+        # widget.Sep(linewidth = 0, padding = 7),
 
         widget.CurrentScreen(padding = 5),
         widget.Sep(linewidth = 0, padding = 7),
