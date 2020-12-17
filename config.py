@@ -183,14 +183,14 @@ keys = [
 ]
 
 group_names = [
-    ("[J]", {'layout': 'monadtall'}),
-    ("[K]", {'layout': 'monadtall'}),
-    ("[L]", {'layout': 'monadtall'}),
-    ("[S]", {'layout': 'monadtall'}),
-    ("[U]", {'layout': 'monadtall'}),
-    ("[I]", {'layout': 'monadtall'}),
-    ("[O]", {'layout': 'monadtall'}),
-    ("[P]", {'layout': 'monadtall'})]
+    ("[ J ]", {'layout': 'monadtall'}),
+    ("[ K ]", {'layout': 'monadtall'}),
+    ("[ L ]", {'layout': 'monadtall'}),
+    ("[ S ]", {'layout': 'monadtall'}),
+    ("[ U ]", {'layout': 'monadtall'}),
+    ("[ I ]", {'layout': 'monadtall'}),
+    ("[ O ]", {'layout': 'monadtall'}),
+    ("[ P ]", {'layout': 'monadtall'})]
 
 group_keys = {
     "1": "j",
@@ -244,6 +244,9 @@ extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
+        # widget.Sep(linewidth = 0, padding = 7),
+        # widget.CurrentScreen(padding = 5),
+
         widget.GroupBox(
             margin_y = 5,
             margin_x = 10,
@@ -261,8 +264,9 @@ def init_widgets_list():
             other_screen_border = colors[0],
             ),
 
-        widget.Sep(linewidth = 0, padding = 10),
-        widget.Notify(),
+        widget.Sep(linewidth = 0, padding = 20),
+        widget.Notify(audiofile = qtile_dir + "/.sounds/notify-sound.mp3"),
+        widget.Sep(linewidth = 0, padding = 20),
 
         widget.Spacer(length = bar.STRETCH),
         widget.Battery(discharge_char = "-", charge_char = "+",
@@ -285,11 +289,8 @@ def init_widgets_list():
         widget.Clock(format = "%a, %H:%M (%d/%m)"),
         widget.Sep(linewidth = 0, padding = 7),
 
-        # widget.CurrentLayout(padding = 5),
-        # widget.Sep(linewidth = 0, padding = 7),
-
-        widget.CurrentScreen(padding = 5),
-        widget.Sep(linewidth = 0, padding = 7),
+        widget.CurrentLayoutIcon(scale = 0.5),
+        widget.Sep(linewidth = 0, padding = 5),
         ]
     return widgets_list
 
