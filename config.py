@@ -230,6 +230,7 @@ colors = [
     ["#ff5555", "#ff5555"], # border line color for current tab
     ["#8d62a9", "#8d62a9"], # border line color for other tab and odd widgets
     ["#668bd7", "#668bd7"], # color for the even widgets
+    ["#1b2c35", "#1b2c35"], # color for the even widgets
     ["#e1acff", "#e1acff"]] # window name
 
 ##### DEFAULT WIDGET SETTINGS #####
@@ -237,7 +238,7 @@ widget_defaults = dict(
     font="Ubuntu Mono",
     fontsize = 16,
     padding = 5,
-    background=colors[0],
+    background=colors[6],
     foreground = colors[2],
     margin_y = 3,
 )
@@ -277,7 +278,11 @@ def init_widgets_list():
         widget.Sep(linewidth = 0, padding = 20),
 
         widget.Spacer(length = bar.STRETCH),
-        widget.Battery(discharge_char = "-", charge_char = "+",
+        widget.Battery(
+            discharge_char = "-",
+            charge_char = "+",
+            unknown_char = "*",
+            update_interval = 300,
             format = "{char}{percent:2.0%} ({hour:d}:{min:02d})",
             ),
         widget.Sep(linewidth = 0),
@@ -293,7 +298,7 @@ def init_widgets_list():
         widget.Volume(padding = 5),
         widget.Sep(linewidth = 0),
 
-        widget.Clock(format = "%a, %H:%M (%d/%m)"),
+        widget.Clock(format = "%a, %H:%M (%d/%m)", update_interval = 60),
         widget.Sep(linewidth = 0),
         ]
     return widgets_list
