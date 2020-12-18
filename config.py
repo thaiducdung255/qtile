@@ -183,14 +183,14 @@ keys = [
 ]
 
 group_names = [
-    ("[ J ]", {'layout': 'monadtall'}),
-    ("[ K ]", {'layout': 'monadtall'}),
-    ("[ L ]", {'layout': 'monadtall'}),
-    ("[ S ]", {'layout': 'monadtall'}),
-    ("[ U ]", {'layout': 'monadtall'}),
-    ("[ I ]", {'layout': 'monadtall'}),
-    ("[ O ]", {'layout': 'monadtall'}),
-    ("[ P ]", {'layout': 'monadtall'})]
+    ("J", {'layout': 'monadtall'}),
+    ("K", {'layout': 'monadtall'}),
+    ("L", {'layout': 'monadtall'}),
+    ("S", {'layout': 'monadtall'}),
+    ("U", {'layout': 'monadtall'}),
+    ("I", {'layout': 'monadtall'}),
+    ("O", {'layout': 'monadtall'}),
+    ("P", {'layout': 'monadtall'})]
 
 group_keys = {
     "1": "j",
@@ -236,7 +236,7 @@ colors = [
 widget_defaults = dict(
     font="Ubuntu Mono",
     fontsize = 16,
-    padding = 0,
+    padding = 5,
     background=colors[0],
     foreground = colors[2],
     margin_y = 3,
@@ -246,29 +246,28 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.CurrentScreen(
-            padding = 5,
             active_text = "◉",
             active_color = colors[3],
             inactive_text = "◉",
             inactive_color = colors[1],
             ),
 
-        widget.CurrentLayoutIcon(scale = 0.5),
+        widget.CurrentLayoutIcon(scale = 0.57),
 
         widget.GroupBox(
-            margin_x = 10,
-            padding_y = 5,
-            padding_x = 0,
+            margin_x = 2,
+            padding_y = 1,
+            padding_x = 2,
             borderwidth = 3,
             active = colors[5],
             inactive = colors[2],
             rounded = True,
             highlight_color = colors[1],
-            highlight_method = "line",
-            this_current_screen_border = colors[3],
+            highlight_method = "block",
+            this_current_screen_border = colors[2],
             this_screen_border = colors[4],
-            other_current_screen_border = colors[0],
-            other_screen_border = colors[0],
+            other_current_screen_border = colors[1],
+            other_screen_border = colors[1],
             ),
 
         widget.Sep(linewidth = 0, padding = 20),
@@ -278,23 +277,22 @@ def init_widgets_list():
         widget.Spacer(length = bar.STRETCH),
         widget.Battery(discharge_char = "-", charge_char = "+",
             format = "{char}{percent:2.0%} ({hour:d}:{min:02d})",
-            padding = 5
             ),
-        widget.Sep(linewidth = 0, padding = 7),
+        widget.Sep(linewidth = 0),
 
         widget.Wlan(
             interface = "wlp0s20f3",
             disconnected_message = "W: N/A",
             format = "W: {essid}",
-            padding = 5),
-        widget.Sep(linewidth = 0, padding = 7),
+            ),
+        widget.Sep(linewidth = 0),
 
         widget.TextBox(text = "V:"),
         widget.Volume(padding = 5),
-        widget.Sep(linewidth = 0, padding = 7),
+        widget.Sep(linewidth = 0),
 
         widget.Clock(format = "%a, %H:%M (%d/%m)"),
-        widget.Sep(linewidth = 0, padding = 7),
+        widget.Sep(linewidth = 0),
         ]
     return widgets_list
 
