@@ -239,18 +239,25 @@ widget_defaults = dict(
     padding = 0,
     background=colors[0],
     foreground = colors[2],
+    margin_y = 3,
 )
 extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
-        # widget.Sep(linewidth = 0, padding = 7),
-        # widget.CurrentScreen(padding = 5),
+        widget.CurrentScreen(
+            padding = 5,
+            active_text = "◉",
+            active_color = colors[3],
+            inactive_text = "◉",
+            inactive_color = colors[1],
+            ),
+
+        widget.CurrentLayoutIcon(scale = 0.5),
 
         widget.GroupBox(
-            margin_y = 5,
             margin_x = 10,
-            padding_y = 2,
+            padding_y = 5,
             padding_x = 0,
             borderwidth = 3,
             active = colors[5],
@@ -288,9 +295,6 @@ def init_widgets_list():
 
         widget.Clock(format = "%a, %H:%M (%d/%m)"),
         widget.Sep(linewidth = 0, padding = 7),
-
-        widget.CurrentLayoutIcon(scale = 0.5),
-        widget.Sep(linewidth = 0, padding = 5),
         ]
     return widgets_list
 
