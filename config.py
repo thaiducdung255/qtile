@@ -25,11 +25,15 @@ keys = [
         lazy.spawn("rofi -show drun -display-drun \"Apps\" -display-run \"Cmd\" -display-window \"Windows\""),
         desc='Rofi show running applications'
         ),
+    Key([mod], "Tab",
+        lazy.spawn("rofi -show window -display-drun \"Apps\" -display-run \"Cmd\" -display-window \"Windows\""),
+        desc='Rofi show running applications'
+        ),
     Key([mod], "b",
         lazy.spawn("brave"),
         desc='Start web browser'
         ),
-    Key([mod], "Tab",
+    Key([mod], "space",
         lazy.next_layout(),
         desc='Toggle through layouts'
         ),
@@ -108,7 +112,7 @@ keys = [
         lazy.layout.maximize(),
         desc='toggle window between minimum and maximum sizes'
         ),
-    Key([mod], "space",
+    Key([super_mod], "m",
         lazy.window.toggle_fullscreen(),
         desc='toggle fullscreen'
         ),
@@ -220,9 +224,7 @@ layout_theme = {
 
 layouts = [
     layout.MonadTall(**layout_theme),
-    layout.MonadWide(**layout_theme),
     layout.Max(**layout_theme),
-    layout.Floating(**layout_theme)
 ]
 
 colors = [
@@ -277,6 +279,8 @@ def init_widgets_list():
             other_screen_border = colors[1],
             ),
 
+        widget.Sep(linewidth = 0, padding = 20),
+        widget.WindowTabs(),
         widget.Sep(linewidth = 0, padding = 20),
         widget.Notify(audiofile = qtile_dir + "/.sounds/notify-sound.mp3"),
         widget.Sep(linewidth = 0, padding = 20),
