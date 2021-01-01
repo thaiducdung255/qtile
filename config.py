@@ -213,7 +213,9 @@ layout_theme = {
     "border_width": 1,
     "margin": 0,
     "border_focus": "green",
-    "border_normal": "1D2330"
+    "border_normal": "1D2330",
+    "max_ratio": 0.75,
+    "min_ratio": 0.25,
     }
 
 layouts = [
@@ -246,14 +248,16 @@ extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
+        widget.Sep(linewidth = 0, padding = 3),
         widget.CurrentScreen(
             active_text = "◉",
             active_color = colors[3],
             inactive_text = "◉",
             inactive_color = colors[1],
+            padding = 2,
             ),
 
-        widget.CurrentLayoutIcon(scale = 0.57),
+        widget.CurrentLayoutIcon(scale = 0.57, padding = 2),
 
         widget.GroupBox(
             margin_x = 2,
@@ -283,19 +287,19 @@ def init_widgets_list():
             charge_char = "+",
             unknown_char = "*",
             update_interval = 300,
-            format = "{char}{percent:2.0%} ({hour:d}:{min:02d})",
+            # format = "{char}{percent:2.0%} ({hour:d}:{min:02d})",
+            format = "{char}{percent:2.0%}",
             ),
         widget.Sep(linewidth = 0),
 
         widget.Wlan(
             interface = "wlp0s20f3",
             disconnected_message = "W: N/A",
-            format = "W: {essid}",
+            format = "{essid}",
             ),
         widget.Sep(linewidth = 0),
 
-        widget.TextBox(text = "V:"),
-        widget.Volume(padding = 5),
+        widget.Volume(),
         widget.Sep(linewidth = 0),
 
         widget.Clock(format = "%a, %H:%M (%d/%m)", update_interval = 60),
