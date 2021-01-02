@@ -286,6 +286,8 @@ def init_widgets_list():
         widget.Sep(linewidth = 0, padding = 20),
 
         widget.Spacer(length = bar.STRETCH),
+        widget.CheckUpdates(),
+        widget.Sep(linewidth = 0, padding = 20),
         widget.Battery(
             discharge_char = "-",
             charge_char = "+",
