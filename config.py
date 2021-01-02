@@ -214,12 +214,12 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([super_mod, "shift"], group_keys[str(i)], lazy.window.togroup(name)))
 
 layout_theme = {
-    "border_width": 1,
-    "margin": 0,
-    "border_focus": "green",
-    "border_normal": "1D2330",
-    "max_ratio": 0.75,
-    "min_ratio": 0.25,
+    "border_width":     1,
+    "margin":           0,
+    "border_focus":     "green",
+    "border_normal":    "1D2330",
+    "max_ratio":        0.75,
+    "min_ratio":        0.25,
     }
 
 layouts = [
@@ -239,77 +239,118 @@ colors = [
 
 ##### DEFAULT WIDGET SETTINGS #####
 widget_defaults = dict(
-    font="Ubuntu Mono",
-    fontsize = 16,
-    padding = 5,
-    background=colors[6],
-    foreground = colors[2],
-    margin_y = 3,
+    font        = "Ubuntu Mono",
+    fontsize    = 16,
+    padding     = 5,
+    background  = colors[6],
+    foreground  = colors[2],
+    margin_y    = 3,
 )
 extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
-        widget.Sep(linewidth = 0, padding = 3),
+        widget.Sep(
+            linewidth       = 0,
+            padding         = 3
+            ),
+
         widget.CurrentScreen(
-            active_text = "◉",
-            active_color = colors[3],
-            inactive_text = "◉",
-            inactive_color = colors[1],
-            padding = 2,
+            active_text     = "◉",
+            active_color    = colors[3],
+            inactive_text   = "◉",
+            inactive_color  = colors[1],
+            padding         = 2,
             ),
 
         widget.CurrentLayoutIcon(scale = 0.57, padding = 2),
 
         widget.GroupBox(
-            margin_x = 2,
-            padding_y = 2,
-            padding_x = 3,
-            borderwidth = 1,
-            disable_drag = True,
-            active = colors[5],
-            inactive = colors[2],
-            rounded = True,
-            hide_unused = True,
-            highlight_color = colors[1],
-            highlight_method = "border",
-            this_current_screen_border = colors[2],
-            this_screen_border = colors[4],
+            margin_x                    = 2,
+            padding_y                   = 2,
+            padding_x                   = 3,
+            borderwidth                 = 1,
+            disable_drag                = True,
+            active                      = colors[5],
+            inactive                    = colors[2],
+            rounded                     = True,
+            hide_unused                 = True,
+            highlight_color             = colors[1],
+            highlight_method            = "border",
+            this_current_screen_border  = colors[2],
+            this_screen_border          = colors[4],
             other_current_screen_border = colors[1],
-            other_screen_border = colors[1],
+            other_screen_border         = colors[1],
             ),
 
-        widget.Sep(linewidth = 0, padding = 20),
+        widget.Sep(
+            linewidth       = 0,
+            padding         = 20
+            ),
+
         widget.WindowTabs(),
-        widget.Sep(linewidth = 0, padding = 20),
-        widget.Notify(audiofile = qtile_dir + "/.sounds/notify-sound.mp3"),
-        widget.Sep(linewidth = 0, padding = 20),
 
-        widget.Spacer(length = bar.STRETCH),
-        widget.CheckUpdates(),
-        widget.Sep(linewidth = 0, padding = 20),
-        widget.Battery(
-            discharge_char = "-",
-            charge_char = "+",
-            unknown_char = "*",
-            update_interval = 300,
-            # format = "{char}{percent:2.0%} ({hour:d}:{min:02d})",
-            format = "{char}{percent:2.0%}",
+        widget.Sep(
+            linewidth       = 0,
+            padding         = 20
             ),
-        widget.Sep(linewidth = 0),
+
+        widget.Notify(
+            audiofile       = qtile_dir + "/.sounds/notify-sound.mp3"
+            ),
+
+        widget.Sep(
+            linewidth       = 0,
+            padding         = 20
+            ),
+
+        widget.Spacer(
+                length      = bar.STRETCH
+                ),
+
+        widget.CheckUpdates(),
+
+        widget.Sep(
+                linewidth   = 0,
+                padding     = 20
+                ),
+
+        widget.Battery(
+            discharge_char  = "-",
+            charge_char     = "+",
+            unknown_char    = "*",
+            update_interval = 300,
+            format          = "{char}{percent:2.0%}",
+            ),
+
+        widget.Sep(
+                linewidth   = 0
+                ),
 
         widget.Wlan(
-            interface = "wlp0s20f3",
-            disconnected_message = "W: N/A",
-            format = "{essid}",
+            interface               = "wlp0s20f3",
+            disconnected_message    = "W: N/A",
+            format                  = "{essid}",
             ),
-        widget.Sep(linewidth = 0),
+
+        widget.Sep(
+                linewidth   = 0
+                ),
 
         widget.Volume(),
-        widget.Sep(linewidth = 0),
 
-        widget.Clock(format = "%a, %H:%M (%d/%m)", update_interval = 60),
-        widget.Sep(linewidth = 0),
+        widget.Sep(
+                linewidth   = 0
+                ),
+
+        widget.Clock(
+                format          = "%a, %H:%M (%d/%m)",
+                update_interval = 60
+                ),
+
+        widget.Sep(
+                linewidth   = 0
+                ),
         ]
     return widgets_list
 
@@ -326,8 +367,8 @@ def init_screens():
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=28))]
 
 if __name__ in ["config", "__main__"]:
-    screens = init_screens()
-    widgets_list = init_widgets_list()
+    screens         = init_screens()
+    widgets_list    = init_widgets_list()
     widgets_screen1 = init_widgets_screen1()
     widgets_screen2 = init_widgets_screen2()
 
@@ -360,29 +401,21 @@ def switch_screens(qtile):
 
 mouse = []
 
-dgroups_key_binder = None
-dgroups_app_rules = []  # type: List
-main = None
-follow_mouse_focus = True
-bring_front_click = False
-cursor_warp = True
+dgroups_key_binder  = None
+dgroups_app_rules   = []
+main                = None
+follow_mouse_focus  = True
+bring_front_click   = False
+cursor_warp         = True
 
 floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'confirm'},
     {'wmclass': 'dialog'},
-    {'wmclass': 'download'},
     {'wmclass': 'error'},
-    {'wmclass': 'file_progress'},
     {'wmclass': 'notification'},
-    {'wmclass': 'splash'},
-    {'wmclass': 'toolbar'},
     {'wmclass': 'confirmreset'},
     {'wmclass': 'makebranch'},
-    {'wmclass': 'maketag'},
-    {'wmclass': 'ssh-askpass'},
-    {'wname': 'branchdialog'},
-    {'wname': 'pinentry'},
-    {'wname': 'xmessage'},
+    {'wname':   'xmessage'},
 ])
 
 auto_fullscreen = True
