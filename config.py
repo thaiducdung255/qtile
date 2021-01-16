@@ -319,7 +319,7 @@ def init_widgets_list():
             discharge_char  = "-",
             charge_char     = "+",
             unknown_char    = "*",
-            update_interval = 300,
+            update_interval = 30,
             format          = "{char}{percent:2.0%}",
             ),
 
