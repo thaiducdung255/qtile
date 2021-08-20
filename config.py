@@ -1,12 +1,9 @@
 import os
-import re
-import socket
 import subprocess
-from libqtile.config import KeyChord, Key, Screen, Group
+from libqtile.config import Key, Screen, Group
 from libqtile.command import lazy
-from libqtile import layout, bar, widget, hook, extension
+from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
-from typing import List
 
 mod = "mod1"
 super_mod = "mod4"
@@ -144,6 +141,14 @@ keys = [
     Key([], "F3",
         lazy.spawn("amixer -q set Master 5%+"),
         desc='Increase volume'
+        ),
+    Key([super_mod, "shift"], "3",
+        lazy.spawn("sh " + qtile_dir + "/.init-scripts/toggle-touchpad.sh 0"),
+        desc='disable touchpad'
+        ),
+    Key([super_mod], "3",
+        lazy.spawn("sh " + qtile_dir + "/.init-scripts/toggle-touchpad.sh 1"),
+        desc='enable touchpad'
         ),
 
     ### Brightness control
