@@ -91,14 +91,22 @@ keys = [
         lazy.layout.shuffle_up(),
         desc='Move windows up in current stack'
         ),
+    Key([mod, "shift"], "period",
+        lazy.layout.increase_nmaster(),
+        desc='Expand window (MonadTall), increase number in master pane (Tile)'
+        ),
+    Key([mod, "shift"], "comma",
+        lazy.layout.decrease_nmaster(),
+        desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
+        ),
     Key([mod], "period",
         lazy.layout.grow(),
-        lazy.layout.increase_nmaster(),
+        lazy.layout.increase_ratio(),
         desc='Expand window (MonadTall), increase number in master pane (Tile)'
         ),
     Key([mod], "comma",
         lazy.layout.shrink(),
-        lazy.layout.decrease_nmaster(),
+        lazy.layout.decrease_ratio(),
         desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
         ),
     Key([mod], "n",
@@ -120,7 +128,6 @@ keys = [
 
     ### Stack controls
     Key([mod, "shift"], "space",
-        lazy.layout.rotte(),
         lazy.layout.flip(),
         desc='Switch which side main pane occupies (XmonadTall)'
         ),
@@ -228,7 +235,12 @@ layout_theme = {
     }
 
 layouts = [
-    layout.MonadTall(**layout_theme),
+    layout.Tile(**layout_theme),
+    # layout.RatioTile(**layout_theme),
+    # layout.Matrix(**layout_theme),
+    # layout.Bsp(**layout_theme),
+    # layout.MonadWide(**layout_theme),
+    # layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
 ]
 
@@ -293,15 +305,9 @@ def init_widgets_list():
             padding         = 20
             ),
 
-        widget.WindowTabs(),
-
-        widget.Sep(
-            linewidth       = 0,
-            padding         = 20
-            ),
-
         widget.Notify(
-            audiofile       = qtile_dir + "/.sounds/notify-sound.mp3"
+            audiofile       = qtile_dir + "/.sounds/notify-sound.mp3",
+            max_chars       = 100,
             ),
 
         widget.Sep(
@@ -355,6 +361,24 @@ def init_widgets_list():
 
         widget.Sep(
                 linewidth   = 0
+                ),
+
+        widget.Pomodoro(
+                max_chars          = 30,
+                length_long_break  = 10,
+                length_short_break = 5,
+                length_pomodori    = 25,
+                prefix_active      = '',
+                prefix_inactive    = '[PI]',
+                prefix_break       = '',
+                prefix_long_break  = '',
+                prefix_paused      = '[PP]',
+                update_interval    = 1,
+                ),
+
+        widget.Sep(
+                linewidth   = 0,
+                padding     = 5
                 ),
         ]
     return widgets_list
@@ -410,7 +434,7 @@ dgroups_key_binder  = None
 dgroups_app_rules   = []
 main                = None
 follow_mouse_focus  = True
-bring_front_click   = False
+bring_front_click   = True
 cursor_warp         = True
 
 floating_layout = layout.Floating(float_rules=[
