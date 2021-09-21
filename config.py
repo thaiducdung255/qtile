@@ -316,7 +316,7 @@ def init_widgets_list():
             fmt        = '',
             fontsize   = 23,
             background = colors[1],
-            foreground = colors[6],
+            foreground = colors[0],
             padding    = 0
         ),
 
@@ -326,25 +326,25 @@ def init_widgets_list():
             inactive_text   = "◉ ",
             inactive_color  = colors[1],
             padding         = 1,
-            background      = colors[6],
+            background      = colors[0],
             fontsize        = 20
         ),
 
         widget.CurrentLayoutIcon(
             scale      = 0.57,
             padding    = 10,
-            background = colors[6]
+            background = colors[0]
         ),
 
         widget.GroupBox(
-            background                  = colors[6],
+            background                  = colors[0],
             margin_x                    = 5,
             padding_y                   = 4,
             padding_x                   = 7,
             borderwidth                 = 2,
             disable_drag                = True,
             active                      = colors[2],
-            inactive                    = colors[6],
+            inactive                    = colors[3],
             rounded                     = True,
             hide_unused                 = True,
             highlight_color             = colors[1],
@@ -359,7 +359,7 @@ def init_widgets_list():
             fmt        = '',
             fontsize   = 23,
             padding    = 0,
-            foreground = colors[6],
+            foreground = colors[0],
             background = colors[1]
         ),
 
@@ -392,7 +392,7 @@ def init_widgets_list():
             fmt        = '',
             fontsize   = 23,
             padding    = 0,
-            foreground = colors[6],
+            foreground = colors[0],
             background = colors[2]
         ),
 
@@ -401,7 +401,7 @@ def init_widgets_list():
             disconnected_message = "睊  ",
             format               = "直  {essid}  ",
             foreground           = colors[2],
-            background           = colors[6],
+            background           = colors[0],
             padding              = 10
         ),
 
@@ -410,7 +410,7 @@ def init_widgets_list():
             fontsize   = 23,
             padding    = 0,
             foreground = colors[2],
-            background = colors[6]
+            background = colors[0]
         ),
 
         widget.TextBox(
@@ -431,7 +431,7 @@ def init_widgets_list():
             fmt        = '',
             fontsize   = 23,
             padding    = 0,
-            foreground = colors[6],
+            foreground = colors[0],
             background = colors[2]
         ),
 
@@ -439,7 +439,7 @@ def init_widgets_list():
             update_interval = 60,
             format          = "%a, %H:%M (%d/%m)",
             foreground      = colors[2],
-            background      = colors[6],
+            background      = colors[0],
             padding         = 13
         ),
 
@@ -448,7 +448,7 @@ def init_widgets_list():
             fontsize   = 23,
             padding    = 0,
             foreground = colors[2],
-            background = colors[6]
+            background = colors[0]
         ),
 
         widget.Pomodoro(
