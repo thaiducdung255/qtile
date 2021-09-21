@@ -316,55 +316,40 @@ def init_widgets_list():
             fmt        = '',
             fontsize   = 23,
             background = colors[1],
+            foreground = colors[6],
             padding    = 0
         ),
 
         widget.CurrentScreen(
-            active_text     = "◉  ",
+            active_text     = "◉ ",
             active_color    = colors[3],
-            inactive_text   = "◉  ",
+            inactive_text   = "◉ ",
             inactive_color  = colors[1],
             padding         = 1,
-            background      = colors[2],
+            background      = colors[6],
             fontsize        = 20
-        ),
-
-        widget.TextBox(
-            fmt        = '',
-            fontsize   = 23,
-            padding    = 0,
-            background = colors[2],
-            foreground = colors[1]
         ),
 
         widget.CurrentLayoutIcon(
             scale      = 0.57,
             padding    = 10,
-            background = colors[1]
-        ),
-
-        widget.TextBox(
-            fmt        = '',
-            fontsize   = 23,
-            padding    = 0,
-            background = colors[1],
-            foreground = colors[2]
+            background = colors[6]
         ),
 
         widget.GroupBox(
-            background                  = colors[2],
+            background                  = colors[6],
             margin_x                    = 5,
             padding_y                   = 4,
-            padding_x                   = 3,
+            padding_x                   = 7,
             borderwidth                 = 2,
             disable_drag                = True,
-            active                      = colors[3],
+            active                      = colors[2],
             inactive                    = colors[6],
             rounded                     = True,
             hide_unused                 = True,
             highlight_color             = colors[1],
             highlight_method            = "border",
-            this_current_screen_border  = colors[3],
+            this_current_screen_border  = colors[2],
             this_screen_border          = colors[4],
             other_current_screen_border = colors[1],
             other_screen_border         = colors[1],
@@ -374,7 +359,7 @@ def init_widgets_list():
             fmt        = '',
             fontsize   = 23,
             padding    = 0,
-            foreground = colors[2],
+            foreground = colors[6],
             background = colors[1]
         ),
 
@@ -407,7 +392,7 @@ def init_widgets_list():
             fmt        = '',
             fontsize   = 23,
             padding    = 0,
-            foreground = colors[1],
+            foreground = colors[6],
             background = colors[2]
         ),
 
@@ -416,7 +401,7 @@ def init_widgets_list():
             disconnected_message = "睊  ",
             format               = "直  {essid}  ",
             foreground           = colors[2],
-            background           = colors[1],
+            background           = colors[6],
             padding              = 10
         ),
 
@@ -425,7 +410,7 @@ def init_widgets_list():
             fontsize   = 23,
             padding    = 0,
             foreground = colors[2],
-            background = colors[1]
+            background = colors[6]
         ),
 
         widget.TextBox(
@@ -446,7 +431,7 @@ def init_widgets_list():
             fmt        = '',
             fontsize   = 23,
             padding    = 0,
-            foreground = colors[1],
+            foreground = colors[6],
             background = colors[2]
         ),
 
@@ -454,7 +439,7 @@ def init_widgets_list():
             update_interval = 60,
             format          = "%a, %H:%M (%d/%m)",
             foreground      = colors[2],
-            background      = colors[1],
+            background      = colors[6],
             padding         = 13
         ),
 
@@ -463,7 +448,7 @@ def init_widgets_list():
             fontsize   = 23,
             padding    = 0,
             foreground = colors[2],
-            background = colors[1]
+            background = colors[6]
         ),
 
         widget.Pomodoro(
