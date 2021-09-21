@@ -283,14 +283,15 @@ layouts = [
 ]
 
 colors = [
-    ["#292d3e", "#292d3e"], # panel background
-    ["#434758", "#434758"], # background for current screen tab
-    ["#ffffff", "#ffffff"], # font color for group names
-    ["#ff5555", "#ff5555"], # border line color for current tab
-    ["#8d62a9", "#8d62a9"], # border line color for other tab and odd widgets
-    ["#668bd7", "#668bd7"], # color for the even widgets
-    ["#1b2c35", "#1b2c35"], # color for the even widgets
-    ["#e1acff", "#e1acff"]] # window name
+    ["#292d3e", "#292d3e"],
+    ["#434758", "#434758"],
+    ["#feeeee", "#feeeee"],
+    ["#ff5555", "#ff5555"],
+    ["#8d62a9", "#8d62a9"],
+    ["#668bd7", "#668bd7"],
+    ["#1b2c35", "#1b2c35"],
+    ["#e1acff", "#e1acff"]
+]
 
 ##### DEFAULT WIDGET SETTINGS #####
 widget_defaults = dict(
@@ -306,97 +307,163 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.Sep(
-            linewidth       = 0,
-            padding         = 3
+            background = colors[1],
+            foreground = colors[1],
+            padding    = 3
+        ),
+
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            background = colors[1],
+            padding    = 0
         ),
 
         widget.CurrentScreen(
-            active_text     = "◉",
+            active_text     = "◉  ",
             active_color    = colors[3],
-            inactive_text   = "◉",
+            inactive_text   = "◉  ",
             inactive_color  = colors[1],
-            padding         = 2,
+            padding         = 1,
+            background      = colors[2],
+            fontsize        = 20
         ),
 
-        widget.CurrentLayoutIcon(scale = 0.57, padding = 2),
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            padding    = 0,
+            background = colors[2],
+            foreground = colors[1]
+        ),
+
+        widget.CurrentLayoutIcon(
+            scale      = 0.57,
+            padding    = 10,
+            background = colors[1]
+        ),
+
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            padding    = 0,
+            background = colors[1],
+            foreground = colors[2]
+        ),
 
         widget.GroupBox(
-            margin_x                    = 2,
-            padding_y                   = 2,
+            background                  = colors[2],
+            margin_x                    = 5,
+            padding_y                   = 4,
             padding_x                   = 3,
-            borderwidth                 = 1,
+            borderwidth                 = 2,
             disable_drag                = True,
-            active                      = colors[5],
-            inactive                    = colors[2],
+            active                      = colors[3],
+            inactive                    = colors[6],
             rounded                     = True,
             hide_unused                 = True,
             highlight_color             = colors[1],
             highlight_method            = "border",
-            this_current_screen_border  = colors[2],
+            this_current_screen_border  = colors[3],
             this_screen_border          = colors[4],
             other_current_screen_border = colors[1],
             other_screen_border         = colors[1],
         ),
 
-        widget.Sep(
-            linewidth       = 0,
-            padding         = 20
-        ),
-
-        widget.Notify(
-            audiofile       = qtile_dir + "/.sounds/notify-sound.mp3",
-            max_chars       = 100,
-        ),
-
-        widget.Sep(
-            linewidth       = 0,
-            padding         = 20
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            padding    = 0,
+            foreground = colors[2],
+            background = colors[1]
         ),
 
         widget.Spacer(
-            length      = bar.STRETCH
+            length     = bar.STRETCH,
+            background = colors[1]
         ),
 
-        widget.Sep(
-            linewidth   = 0,
-            padding     = 20
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            padding    = 0,
+            background = colors[1],
+            foreground = colors[2]
         ),
 
         widget.Battery(
-            discharge_char  = "-",
-            charge_char     = "+",
-            unknown_char    = "*",
-            update_interval = 30,
+            discharge_char  = " ",
+            charge_char     = " ",
+            full_char       = " ",
+            unknown_char    = " ",
+            update_interval = 2,
             format          = "{char}{percent:2.0%}",
+            foreground      = colors[6],
+            background      = colors[2],
+            padding         = 15
         ),
 
-        widget.Sep(
-            linewidth   = 0
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            padding    = 0,
+            foreground = colors[1],
+            background = colors[2]
         ),
 
         widget.Wlan(
-            interface               = "wlp0s20f3",
-            disconnected_message    = "W: N/A",
-            format                  = "{essid}",
+            interface            = "wlp0s20f3",
+            disconnected_message = "睊  ",
+            format               = "直  {essid}  ",
+            foreground           = colors[2],
+            background           = colors[1],
+            padding              = 10
         ),
 
-        widget.Sep(
-            linewidth   = 0
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            padding    = 0,
+            foreground = colors[2],
+            background = colors[1]
         ),
 
-        widget.Volume(),
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            foreground = colors[1],
+            background = colors[2],
+            padding    = 0,
+        ),
 
-        widget.Sep(
-            linewidth   = 0
+        widget.Volume(
+            foreground = colors[1],
+            background = colors[2],
+            padding    = 10
+        ),
+
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            padding    = 0,
+            foreground = colors[1],
+            background = colors[2]
         ),
 
         widget.Clock(
+            update_interval = 60,
             format          = "%a, %H:%M (%d/%m)",
-            update_interval = 60
+            foreground      = colors[2],
+            background      = colors[1],
+            padding         = 13
         ),
 
-        widget.Sep(
-            linewidth   = 0
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            padding    = 0,
+            foreground = colors[2],
+            background = colors[1]
         ),
 
         widget.Pomodoro(
@@ -404,17 +471,28 @@ def init_widgets_list():
             length_long_break  = 10,
             length_short_break = 5,
             length_pomodori    = 25,
-            prefix_active      = '',
-            prefix_inactive    = '[PI]',
-            prefix_break       = '',
-            prefix_long_break  = '',
-            prefix_paused      = '[PP]',
-            update_interval    = 1,
+            prefix_active      = '  ',
+            prefix_inactive    = '  ',
+            prefix_break       = '  ',
+            prefix_long_break  = '  ',
+            prefix_paused      = '  ',
+            update_interval    = 0.5,
+            background         = colors[2],
+            padding            = 8
+        ),
+
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            padding    = 0,
+            foreground = colors[2],
+            background = colors[1]
         ),
 
         widget.Sep(
-            linewidth   = 0,
-            padding     = 5
+            linewidth  = 0,
+            background = colors[1],
+            padding    = 5
         ),
     ]
 
