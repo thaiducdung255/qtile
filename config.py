@@ -7,7 +7,7 @@ from libqtile.lazy import lazy
 
 mod = "mod1"
 super_mod = "mod4"
-myTerm = "termite"
+myTerm = "alacritty"
 home = os.path.expanduser('~')
 qtile_dir = home + "/.config/qtile"
 myConfig = home + "/.config/qtile/config.py"
@@ -540,6 +540,7 @@ cursor_warp         = True
 floating_layout = layout.Floating(float_rules=[
     *layout.Floating.default_float_rules,
     Match(wm_class='xmessage'),
+    Match(wm_class='Pavucontrol'),
 ])
 
 auto_fullscreen = True
