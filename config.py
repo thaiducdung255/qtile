@@ -146,10 +146,10 @@ keys = [
         desc='toggle fullscreen'
     ),
 
-    Key([mod], "f",
-        lazy.window.toggle_floating(),
-        desc='toggle floating'
-    ),
+    # Key([mod], "f",
+    #     lazy.window.toggle_floating(),
+    #     desc='toggle floating'
+    # ),
 
     ### Stack controls
     Key([mod, "shift"], "space",
