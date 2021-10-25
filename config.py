@@ -44,7 +44,7 @@ keys = [
         desc='Kill active window'
     ),
 
-    Key([mod], "r",
+    Key([super_mod], "r",
         lazy.restart(),
         desc='Restart Qtile'
     ),
@@ -54,7 +54,7 @@ keys = [
         desc='Shutdown Qtile'
     ),
 
-    Key([super_mod], "r",
+    Key([super_mod, "shift"], "r",
         lazy.spawn("xmodmap " + qtile_dir + "/.init-scripts/xmodmap"),
         desc='restore xmodmap'
     ),
@@ -231,7 +231,7 @@ keys = [
     ),
 
     Key([super_mod], "Escape",
-        lazy.spawn(qtile_dir + "/.init-scripts/power.sh"),
+        lazy.spawn(qtile_dir + "/.init-scripts/power-v2.sh"),
         desc='Power management'
     ),
 ]
@@ -449,29 +449,6 @@ def init_widgets_list():
             padding    = 0,
             foreground = colors[2],
             background = colors[0]
-        ),
-
-        widget.Pomodoro(
-            max_chars          = 30,
-            length_long_break  = 10,
-            length_short_break = 5,
-            length_pomodori    = 25,
-            prefix_active      = '  ',
-            prefix_inactive    = '  ',
-            prefix_break       = '  ',
-            prefix_long_break  = '  ',
-            prefix_paused      = '  ',
-            update_interval    = 0.5,
-            background         = colors[2],
-            padding            = 8
-        ),
-
-        widget.TextBox(
-            fmt        = '',
-            fontsize   = 23,
-            padding    = 0,
-            foreground = colors[2],
-            background = colors[1]
         ),
 
         widget.Sep(
