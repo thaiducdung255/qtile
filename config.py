@@ -450,12 +450,6 @@ def init_widgets_list():
             foreground = colors[2],
             background = colors[0]
         ),
-
-        widget.Sep(
-            linewidth  = 0,
-            background = colors[1],
-            padding    = 5
-        ),
     ]
 
     return widgets_list
