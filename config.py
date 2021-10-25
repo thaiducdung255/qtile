@@ -444,11 +444,17 @@ def init_widgets_list():
         ),
 
         widget.TextBox(
-            fmt        = '',
+            fmt        = '',
             fontsize   = 23,
             padding    = 0,
-            foreground = colors[2],
-            background = colors[0]
+            foreground = colors[0],
+            background = colors[1]
+        ),
+
+        widget.Sep(
+            background = colors[1],
+            foreground = colors[1],
+            padding    = 3
         ),
     ]
 
