@@ -170,11 +170,13 @@ keys = [
 
     Key([], "F2",
         lazy.spawn("amixer set Master 5%-"),
+        lazy.spawn("pactl set-sink-volume 1 -5%"),
         desc='Decrease volume'
     ),
 
     Key([], "F3",
         lazy.spawn("amixer -q set Master 5%+"),
+        lazy.spawn("pactl set-sink-volume 1 +5%"),
         desc='Increase volume'
     ),
 
@@ -422,6 +424,7 @@ def init_widgets_list():
         ),
 
         widget.Volume(
+            channel    = 'Master',
             foreground = colors[1],
             background = colors[2],
             padding    = 10
