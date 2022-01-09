@@ -25,8 +25,13 @@ keys = [
     ),
 
     Key([mod], "Tab",
-        lazy.spawn("rofi -show window -display-drun \"Apps: \" -display-run \"Cmd: \" -display-window \"Windows: \""),
+        lazy.spawn("/home/df/.config/rofi/scripts/index.sh"),
         desc='Rofi show running applications'
+    ),
+
+    Key([mod], "c",
+        lazy.spawn("google-chrome-stable"),
+        desc='Start web browser'
     ),
 
     Key([mod], "b",
@@ -170,13 +175,13 @@ keys = [
 
     Key([], "F2",
         lazy.spawn("amixer set Master 5%-"),
-        lazy.spawn("pactl set-sink-volume 1 -5%"),
+        lazy.spawn("pactl set-sink-volume 0 -5%"),
         desc='Decrease volume'
     ),
 
     Key([], "F3",
-        lazy.spawn("amixer -q set Master 5%+"),
-        lazy.spawn("pactl set-sink-volume 1 +5%"),
+        lazy.spawn("amixer set Master 5%+"),
+        lazy.spawn("pactl set-sink-volume 0 +5%"),
         desc='Increase volume'
     ),
 
@@ -239,14 +244,14 @@ keys = [
 ]
 
 group_names = [
-    ("J", {'layout': 'monadtall'}),
-    ("K", {'layout': 'monadtall'}),
-    ("L", {'layout': 'monadtall'}),
-    ("S", {'layout': 'monadtall'}),
-    ("U", {'layout': 'monadtall'}),
-    ("I", {'layout': 'monadtall'}),
-    ("O", {'layout': 'monadtall'}),
-    ("P", {'layout': 'monadtall'})]
+    ("Javan",     {'layout': 'monadtall'}),
+    ("Kemuel",    {'layout': 'monadtall'}),
+    ("Laila",     {'layout': 'monadtall'}),
+    ("Seraphina", {'layout': 'monadtall'}),
+    ("Uriel",     {'layout': 'monadtall'}),
+    ("Ieshim",    {'layout': 'monadtall'}),
+    ("Orifiel",   {'layout': 'monadtall'}),
+    ("Parisa",    {'layout': 'monadtall'})]
 
 group_keys = {
     "1": "j",
@@ -267,7 +272,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 layout_theme = {
     "border_width":     1,
-    "margin":           0,
+    "margin":           1,
     "border_focus":     "green",
     "border_normal":    "1D2330",
     "max_ratio":        0.75,
@@ -400,8 +405,8 @@ def init_widgets_list():
 
         widget.Wlan(
             interface            = "wlp0s20f3",
-            disconnected_message = "睊  ",
-            format               = "直  {essid}  ",
+            disconnected_message = "睊 ",
+            format               = "直 {essid}  ",
             foreground           = colors[2],
             background           = colors[0],
             padding              = 10

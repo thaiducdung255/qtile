@@ -13,5 +13,4 @@ case $res in
    Restart)
       shutdown -r now
    ;;
-
-  esac
+esac
