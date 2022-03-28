@@ -7,7 +7,7 @@ from libqtile.lazy import lazy
 
 mod = "mod1"
 super_mod = "mod4"
-myTerm = "alacritty"
+myTerm = "kitty"
 home = os.path.expanduser('~')
 qtile_dir = home + "/.config/qtile"
 myConfig = home + "/.config/qtile/config.py"
@@ -313,12 +313,14 @@ extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
+        # 0
         widget.Sep(
             background = colors[1],
             foreground = colors[1],
             padding    = 3
         ),
 
+        # 1
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -327,6 +329,7 @@ def init_widgets_list():
             padding    = 0
         ),
 
+        # 2
         widget.CurrentScreen(
             active_text     = "◉",
             active_color    = colors[3],
@@ -337,12 +340,14 @@ def init_widgets_list():
             fontsize        = 20
         ),
 
+        # 3
         widget.CurrentLayoutIcon(
             scale      = 0.57,
             padding    = 10,
             background = colors[0]
         ),
 
+        # 4
         widget.GroupBox(
             background                  = colors[0],
             margin_x                    = 5,
@@ -362,6 +367,7 @@ def init_widgets_list():
             other_screen_border         = colors[1],
         ),
 
+        # 5
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -370,11 +376,13 @@ def init_widgets_list():
             background = colors[1]
         ),
 
+        # 6
         widget.Spacer(
             length     = bar.STRETCH,
             background = colors[1]
         ),
 
+        # 7
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -383,6 +391,7 @@ def init_widgets_list():
             foreground = colors[2]
         ),
 
+        # 8
         widget.Battery(
             discharge_char  = " ",
             charge_char     = " ",
@@ -395,6 +404,7 @@ def init_widgets_list():
             padding         = 15
         ),
 
+        # 9
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -403,6 +413,7 @@ def init_widgets_list():
             background = colors[2]
         ),
 
+        # 10
         widget.Wlan(
             interface            = "wlp0s20f3",
             disconnected_message = "睊 ",
@@ -412,6 +423,7 @@ def init_widgets_list():
             padding              = 10
         ),
 
+        # 11
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -420,6 +432,7 @@ def init_widgets_list():
             background = colors[0]
         ),
 
+        # 12
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -428,6 +441,7 @@ def init_widgets_list():
             padding    = 0,
         ),
 
+        # 13
         widget.Volume(
             channel    = 'Master',
             foreground = colors[1],
@@ -435,6 +449,7 @@ def init_widgets_list():
             padding    = 10
         ),
 
+        # 14
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -443,6 +458,7 @@ def init_widgets_list():
             background = colors[2]
         ),
 
+        # 15
         widget.Clock(
             update_interval = 60,
             format          = "%a, %H:%M (%d/%m)",
@@ -451,6 +467,7 @@ def init_widgets_list():
             padding         = 13
         ),
 
+        # 16
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -459,12 +476,21 @@ def init_widgets_list():
             background = colors[1]
         ),
 
+        # 17
         widget.Sep(
             background = colors[1],
             foreground = colors[1],
             padding    = 3
         ),
     ]
+
+    checkBattCmd = os.popen('ls /sys/class/power_supply')
+    checkBattOutput = checkBattCmd.read()
+
+    # remove battery widget if there is no battery
+    if len(checkBattOutput) == 0:
+        widgets_list.pop(8)
+        widgets_list.pop(7)
 
     return widgets_list
 
