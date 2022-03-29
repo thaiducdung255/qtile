@@ -272,7 +272,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 layout_theme = {
     "border_width":     1,
-    "margin":           1,
+    "margin":           0,
     "border_focus":     "green",
     "border_normal":    "1D2330",
     "max_ratio":        0.75,

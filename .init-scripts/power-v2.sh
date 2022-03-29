@@ -1,16 +1,11 @@
 #!/bin/bash
-res=$(echo -e "Lock\nShutdown\nRestart\nCancel" | rofi -dmenu -i -p "Power: ")
+res=$(echo -e "Yes\nNo" | rofi -dmenu -i -p "Power off ?")
 
 case $res in
-   Lock)
-      xscreensaver-command -l
-   ;;
-
-   Shutdown)
+   Yes)
       shutdown now
    ;;
 
-   Restart)
-      shutdown -r now
+   No)
    ;;
 esac
