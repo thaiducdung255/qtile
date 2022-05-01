@@ -12,6 +12,25 @@ home = os.path.expanduser('~')
 qtile_dir = home + "/.config/qtile"
 myConfig = home + "/.config/qtile/config.py"
 
+keyboardLayout = "colemak"
+
+customKeymap = {
+    "left": "h",
+    "right": "l",
+    "up": "k",
+    "down": "j",
+    "normal": "n"
+}
+
+if keyboardLayout == 'colemak':
+    customKeymap = {
+        "left": "h",
+        "right": "i",
+        "up": "e",
+        "down": "n",
+        "normal": "k"
+    }
+
 keys = [
     ### The essentials
     Key([mod], "Return",
@@ -73,43 +92,43 @@ keys = [
 
 
     ### Window controls
-    Key([mod], "h",
+    Key([mod], customKeymap["left"],
         lazy.layout.left(),
         desc='Move focus left in current stack pane'
     ),
 
-    Key([mod], "l",
+    Key([mod], customKeymap["right"],
         lazy.layout.right(),
         desc='Move focus right in current stack pane'
     ),
 
-    Key([mod], "j",
+    Key([mod], customKeymap["down"],
         lazy.layout.down(),
         desc='Move focus down in current stack pane'
     ),
 
-    Key([mod], "k",
+    Key([mod], customKeymap["up"],
         lazy.layout.up(),
         desc='Move focus up in current stack pane'
     ),
 
-    Key([mod, "shift"], "h",
+    Key([mod, "shift"], customKeymap["left"],
         lazy.layout.swap_left(),
         desc='Move windows left in current stack'
     ),
 
-    Key([mod, "shift"], "l",
+    Key([mod, "shift"], customKeymap["left"],
         lazy.layout.swap_right(),
         lazy.layout.left(),
         desc='Move windows right in current stack'
     ),
 
-    Key([mod, "shift"], "j",
+    Key([mod, "shift"], customKeymap["down"],
         lazy.layout.shuffle_down(),
         desc='Move windows down in current stack'
     ),
 
-    Key([mod, "shift"], "k",
+    Key([mod, "shift"], customKeymap["up"],
         lazy.layout.shuffle_up(),
         desc='Move windows up in current stack'
     ),
@@ -136,7 +155,7 @@ keys = [
         desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
     ),
 
-    Key([mod], "n",
+    Key([mod], customKeymap["normal"],
         lazy.layout.normalize(),
         desc='normalize window size ratios'
     ),
@@ -262,7 +281,30 @@ group_keys = {
     "6": "i",
     "7": "o",
     "8": "p",
+}
+
+if keyboardLayout == "colemak":
+    group_keys = {
+        "1": "n",
+        "2": "e",
+        "3": "i",
+        "4": "o",
+        "5": "l",
+        "6": "u",
+        "7": "y",
+        "8": "semicolon",
     }
+
+    group_names = [
+        ("Nakir",     {'layout': 'monadtall'}),
+        ("Eleleth",   {'layout': 'monadtall'}),
+        ("Israfil",   {'layout': 'monadtall'}),
+        ("Orifiel",   {'layout': 'monadtall'}),
+        ("Laila",     {'layout': 'monadtall'}),
+        ("Uriel",     {'layout': 'monadtall'}),
+        ("Yomiel",    {'layout': 'monadtall'}),
+        ("Seraphina", {'layout': 'monadtall'})
+    ]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
