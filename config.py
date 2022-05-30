@@ -252,7 +252,7 @@ keys = [
 
     ### Power control
     Key([super_mod], "x",
-        lazy.spawn("xscreensaver-command -l"),
+        lazy.spawn("dm-tool lock"),
         desc='Lock screen'
     ),
 
