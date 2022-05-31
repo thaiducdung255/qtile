@@ -366,7 +366,7 @@ def init_widgets_list():
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
-            background = colors[1],
+            background = colors[0],
             foreground = colors[0],
             padding    = 0
         ),
@@ -383,17 +383,17 @@ def init_widgets_list():
         ),
 
         # 3
-        widget.CurrentLayoutIcon(
-            scale      = 0.57,
-            padding    = 10,
-            background = colors[0]
+        widget.Sep(
+            padding    = 5,
+            background = colors[0],
+            foreground = colors[0]
         ),
 
         # 4
         widget.GroupBox(
             background                  = colors[0],
             margin_x                    = 5,
-            padding_y                   = 4,
+            padding_y                   = 2,
             padding_x                   = 7,
             borderwidth                 = 2,
             disable_drag                = True,
@@ -434,6 +434,24 @@ def init_widgets_list():
         ),
 
         # 8
+        widget.TextBox(
+            fmt        = '',
+            fontsize   = 23,
+            padding    = 0,
+            background = colors[1],
+            foreground = colors[0]
+        ),
+
+        # 9
+        widget.Net(
+            format     = '{down} ↓↑ {up}  ',
+            padding    = 0,
+            foreground = colors[2],
+            background = colors[0],
+            use_bits   = False,
+        ),
+
+        # 10
         widget.Battery(
             discharge_char  = " ",
             charge_char     = " ",
@@ -446,7 +464,7 @@ def init_widgets_list():
             padding         = 15
         ),
 
-        # 9
+        # 11
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -455,7 +473,7 @@ def init_widgets_list():
             background = colors[2]
         ),
 
-        # 10
+        # 12
         widget.Wlan(
             interface            = "wlp0s20f3",
             disconnected_message = "睊 ",
@@ -465,7 +483,7 @@ def init_widgets_list():
             padding              = 10
         ),
 
-        # 11
+        # 12
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -474,7 +492,7 @@ def init_widgets_list():
             background = colors[0]
         ),
 
-        # 12
+        # 13
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -483,7 +501,7 @@ def init_widgets_list():
             padding    = 0,
         ),
 
-        # 13
+        # 14
         widget.Volume(
             channel    = 'Master',
             foreground = colors[1],
@@ -491,7 +509,7 @@ def init_widgets_list():
             padding    = 10
         ),
 
-        # 14
+        # 15
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -500,7 +518,7 @@ def init_widgets_list():
             background = colors[2]
         ),
 
-        # 15
+        # 16
         widget.Clock(
             update_interval = 60,
             format          = "%a, %H:%M (%d/%m)",
@@ -509,7 +527,7 @@ def init_widgets_list():
             padding         = 13
         ),
 
-        # 16
+        # 17
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
@@ -518,7 +536,7 @@ def init_widgets_list():
             background = colors[1]
         ),
 
-        # 17
+        # 18
         widget.Sep(
             background = colors[1],
             foreground = colors[1],
@@ -526,13 +544,27 @@ def init_widgets_list():
         ),
     ]
 
+    # remove wifi widget if there is no wifi
+    checkINetCmd = os.popen('nmcli | grep wlp0s20f3')
+    checkINetOutput = checkINetCmd.read()
+
+    if len(checkINetOutput) != 0:
+        widgets_list.pop(8)
+        widgets_list.pop(8)
+    else:
+        widgets_list.pop(7)
+
+    # remove battery widget if there is no battery
     checkBattCmd = os.popen('ls /sys/class/power_supply')
     checkBattOutput = checkBattCmd.read()
 
-    # remove battery widget if there is no battery
     if len(checkBattOutput) == 0:
-        widgets_list.pop(8)
-        widgets_list.pop(7)
+        if len(checkINetOutput) != 0:
+            widgets_list.pop(8)
+            widgets_list.pop(8)
+        else:
+            widgets_list.pop(9)
+            widgets_list.pop(9)
 
     return widgets_list
 
