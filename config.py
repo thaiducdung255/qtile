@@ -170,11 +170,6 @@ keys = [
         desc='toggle fullscreen'
     ),
 
-    # Key([mod], "f",
-    #     lazy.window.toggle_floating(),
-    #     desc='toggle floating'
-    # ),
-
     ### Stack controls
     Key([mod, "shift"], "space",
         lazy.layout.flip(),
@@ -430,95 +425,50 @@ def init_widgets_list():
             fontsize   = 23,
             padding    = 0,
             background = colors[1],
-            foreground = colors[2]
-        ),
-
-        # 8
-        widget.TextBox(
-            fmt        = '',
-            fontsize   = 23,
-            padding    = 0,
-            background = colors[1],
             foreground = colors[0]
         ),
 
-        # 9
+        # 8
         widget.Net(
-            format     = '{down} ↓↑ {up}  ',
+            format     = '{down} ↓↑{up}  ',
             padding    = 0,
             foreground = colors[2],
             background = colors[0],
             use_bits   = False,
+            update_interval = 5,
         ),
 
-        # 10
+        # 9
         widget.Battery(
             discharge_char  = " ",
             charge_char     = " ",
             full_char       = " ",
             unknown_char    = " ",
-            update_interval = 2,
-            format          = "{char}{percent:2.0%}",
-            foreground      = colors[6],
-            background      = colors[2],
+            update_interval = 5,
+            format          = "{char}{percent:2.0%} ",
+            foreground      = colors[2],
+            background      = colors[0],
             padding         = 15
         ),
 
-        # 11
-        widget.TextBox(
-            fmt        = '',
-            fontsize   = 23,
-            padding    = 0,
-            foreground = colors[0],
-            background = colors[2]
-        ),
-
-        # 12
-        widget.Wlan(
-            interface            = "wlp0s20f3",
-            disconnected_message = "睊 ",
-            format               = "直 {essid}  ",
-            foreground           = colors[2],
-            background           = colors[0],
-            padding              = 10
-        ),
-
-        # 12
-        widget.TextBox(
-            fmt        = '',
-            fontsize   = 23,
-            padding    = 0,
-            foreground = colors[2],
-            background = colors[0]
-        ),
-
-        # 13
+        # 10
         widget.TextBox(
             fmt        = '',
             fontsize   = 23,
-            foreground = colors[1],
-            background = colors[2],
+            foreground = colors[2],
+            background = colors[0],
             padding    = 0,
         ),
 
-        # 14
+        # 11
         widget.Volume(
             channel    = 'Master',
-            foreground = colors[1],
-            background = colors[2],
+            foreground = colors[2],
+            background = colors[0],
             padding    = 10
         ),
 
-        # 15
-        widget.TextBox(
-            fmt        = '',
-            fontsize   = 23,
-            padding    = 0,
-            foreground = colors[0],
-            background = colors[2]
-        ),
-
-        # 16
+        # 12
         widget.Clock(
             update_interval = 60,
             format          = "%a, %H:%M (%d/%m)",
@@ -527,16 +477,7 @@ def init_widgets_list():
             padding         = 13
         ),
 
-        # 17
-        widget.TextBox(
-            fmt        = '',
-            fontsize   = 23,
-            padding    = 0,
-            foreground = colors[0],
-            background = colors[1]
-        ),
-
-        # 18
+        # 13
         widget.Sep(
             background = colors[1],
             foreground = colors[1],
@@ -544,37 +485,22 @@ def init_widgets_list():
         ),
     ]
 
-    # remove wifi widget if there is no wifi
-    checkINetCmd = os.popen('nmcli | grep wlp0s20f3')
-    checkINetOutput = checkINetCmd.read()
-
-    if len(checkINetOutput) != 0:
-        widgets_list.pop(8)
-        widgets_list.pop(8)
-    else:
-        widgets_list.pop(7)
-
     # remove battery widget if there is no battery
     checkBattCmd = os.popen('ls /sys/class/power_supply')
     checkBattOutput = checkBattCmd.read()
 
     if len(checkBattOutput) == 0:
-        if len(checkINetOutput) != 0:
-            widgets_list.pop(8)
-            widgets_list.pop(8)
-        else:
-            widgets_list.pop(9)
-            widgets_list.pop(9)
+        widgets_list.pop(9)
 
     return widgets_list
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
-    return widgets_screen1                       # Slicing removes unwanted widgets on Monitors 1,3
+    return widgets_screen1
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    return widgets_screen2                       # Monitor 2 will display all widgets in widgets_list
+    return widgets_screen2
 
 def init_screens():
     return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=28)),
