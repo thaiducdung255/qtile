@@ -39,12 +39,12 @@ keys = [
     ),
 
     Key([mod], "Escape",
-        lazy.spawn("rofi -show drun -display-drun \"Apps: \" -display-run \"Cmd: \" -display-window \"Windows: \""),
+        lazy.spawn("rofi2 -show drun -display-drun \"Apps: \" -display-run \"Cmd: \" -display-window \"Windows: \""),
         desc='Rofi show running applications'
     ),
 
     Key([mod], "Tab",
-        lazy.spawn("/home/df/.config/rofi/scripts/index.sh"),
+        lazy.spawn(home + "/.config/rofi/scripts/index.sh"),
         desc='Rofi show running applications'
     ),
 
@@ -252,7 +252,7 @@ keys = [
     ),
 
     Key([super_mod], "Escape",
-        lazy.spawn(qtile_dir + "/.init-scripts/power-v2.sh"),
+        lazy.spawn("/usr/bin/zsh " + qtile_dir + "/.init-scripts/power-v2.sh"),
         desc='Power management'
     ),
 ]
