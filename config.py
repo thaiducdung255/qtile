@@ -430,11 +430,11 @@ def init_widgets_list():
 
         # 8
         widget.Net(
-            format     = '{down} ↓↑{up}  ',
-            padding    = 0,
-            foreground = colors[2],
-            background = colors[0],
-            use_bits   = False,
+            format          = '{down} ↓↑{up}  ',
+            padding         = 10,
+            foreground      = colors[2],
+            background      = colors[0],
+            use_bits        = False,
             update_interval = 5,
         ),
 
@@ -448,7 +448,7 @@ def init_widgets_list():
             format          = "{char}{percent:2.0%} ",
             foreground      = colors[2],
             background      = colors[0],
-            padding         = 15
+            padding         = 10,
         ),
 
         # 10
@@ -474,14 +474,14 @@ def init_widgets_list():
             format          = "%a, %H:%M (%d/%m)",
             foreground      = colors[2],
             background      = colors[0],
-            padding         = 13
+            padding         = 10
         ),
 
         # 13
         widget.Sep(
             background = colors[1],
             foreground = colors[1],
-            padding    = 3
+            padding    = 5
         ),
     ]
 
