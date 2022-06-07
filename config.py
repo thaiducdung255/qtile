@@ -39,7 +39,7 @@ keys = [
     ),
 
     Key([mod], "Escape",
-        lazy.spawn("rofi2 -show drun -display-drun \"Apps: \" -display-run \"Cmd: \" -display-window \"Windows: \""),
+        lazy.spawn(home + "/.config/rofi/scripts/menu.sh"),
         desc='Rofi show running applications'
     ),
 
