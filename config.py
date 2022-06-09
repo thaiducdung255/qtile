@@ -350,13 +350,6 @@ extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
-        # 0
-        widget.Sep(
-            background = colors[1],
-            foreground = colors[1],
-            padding    = 3
-        ),
-
         # 1
         widget.TextBox(
             fmt        = '',
@@ -476,13 +469,6 @@ def init_widgets_list():
             background      = colors[0],
             padding         = 10
         ),
-
-        # 13
-        widget.Sep(
-            background = colors[1],
-            foreground = colors[1],
-            padding    = 5
-        ),
     ]
 
     # remove battery widget if there is no battery
@@ -490,7 +476,7 @@ def init_widgets_list():
     checkBattOutput = checkBattCmd.read()
 
     if len(checkBattOutput) == 0:
-        widgets_list.pop(9)
+        widgets_list.pop(8)
 
     return widgets_list
 
