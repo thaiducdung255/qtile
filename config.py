@@ -11,7 +11,6 @@ myTerm = "kitty"
 home = os.path.expanduser('~')
 qtile_dir = home + "/.config/qtile"
 myConfig = home + "/.config/qtile/config.py"
-
 keyboardLayout = "colemak"
 
 customKeymap = {
