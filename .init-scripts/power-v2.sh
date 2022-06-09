@@ -2,11 +2,11 @@
 res=$(echo -e "Shutdown\nRestart" | rofi -dmenu -i -p "Power")
 
 case $res in
-   Yes)
+   Shutdown)
       shutdown now
    ;;
 
-   No)
+   Restart)
       reboot
    ;;
 esac
