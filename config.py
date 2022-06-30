@@ -6,7 +6,8 @@ from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
 
 mod = "mod1"
-super_mod = "mod4"
+secondary_mod = "mod4"
+extra_mod = "mod5"
 myTerm = "kitty"
 home = os.path.expanduser('~')
 qtile_dir = home + "/.config/qtile"
@@ -67,7 +68,7 @@ keys = [
         desc='Kill active window'
     ),
 
-    Key([super_mod], "r",
+    Key([secondary_mod], "r",
         lazy.restart(),
         desc='Restart Qtile'
     ),
@@ -77,7 +78,7 @@ keys = [
         desc='Shutdown Qtile'
     ),
 
-    Key([super_mod, "shift"], "r",
+    Key([secondary_mod, "shift"], "r",
         lazy.spawn("xmodmap " + qtile_dir + "/.init-scripts/xmodmap"),
         desc='restore xmodmap'
     ),
@@ -164,7 +165,7 @@ keys = [
         desc='toggle window between minimum and maximum sizes'
     ),
 
-    Key([super_mod], "m",
+    Key([secondary_mod], "m",
         lazy.window.toggle_fullscreen(),
         desc='toggle fullscreen'
     ),
@@ -198,12 +199,12 @@ keys = [
         desc='Increase volume'
     ),
 
-    Key([super_mod, "shift"], "3",
+    Key([secondary_mod, "shift"], "3",
         lazy.spawn("sh " + qtile_dir + "/.init-scripts/toggle-touchpad.sh 0"),
         desc='disable touchpad'
     ),
 
-    Key([super_mod], "3",
+    Key([secondary_mod], "3",
         lazy.spawn("sh " + qtile_dir + "/.init-scripts/toggle-touchpad.sh 1"),
         desc='enable touchpad'
     ),
@@ -211,46 +212,46 @@ keys = [
 
     ### Brightness control
     ## monitor #1
-    Key([super_mod], "1",
+    Key([secondary_mod], "1",
         lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh inc 0"),
         desc='Increase brightness'
     ),
 
-    Key([super_mod, "shift"], "1",
+    Key([secondary_mod, "shift"], "1",
         lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh des 0"),
         desc='Decrease brightness'
     ),
 
-    Key([super_mod, "control"], "1",
+    Key([secondary_mod, "control"], "1",
         lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh dim 0"),
         desc='Dim screen'
     ),
 
 
     ## monitor #2
-    Key([super_mod], "2",
+    Key([secondary_mod], "2",
         lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh inc 1"),
         desc='Increase brightness'
     ),
 
-    Key([super_mod, "shift"], "2",
+    Key([secondary_mod, "shift"], "2",
         lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh des 1"),
         desc='Decrease brightness'
     ),
 
-    Key([super_mod, "control"], "2",
+    Key([secondary_mod, "control"], "2",
         lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh dim 1"),
         desc='Dim screen'
     ),
 
 
     ### Power control
-    Key([super_mod], "x",
+    Key([secondary_mod], "x",
         lazy.spawn("dm-tool lock"),
         desc='Lock screen'
     ),
 
-    Key([super_mod], "Escape",
+    Key([secondary_mod], "Escape",
         lazy.spawn("/usr/bin/zsh " + qtile_dir + "/.init-scripts/power-v2.sh"),
         desc='Power management'
     ),
@@ -303,8 +304,8 @@ if keyboardLayout == "colemak":
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
 for i, (name, kwargs) in enumerate(group_names, 1):
-    keys.append(Key([super_mod], group_keys[str(i)], lazy.group[name].toscreen()))
-    keys.append(Key([super_mod, "shift"], group_keys[str(i)], lazy.window.togroup(name)))
+    keys.append(Key([secondary_mod], group_keys[str(i)], lazy.group[name].toscreen()))
+    keys.append(Key([secondary_mod, "shift"], group_keys[str(i)], lazy.window.togroup(name)))
 
 layout_theme = {
     "border_width":     1,
