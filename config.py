@@ -363,7 +363,8 @@ def init_widgets_list():
         widget.CurrentScreen(
             active_text     = "❇",
             active_color    = colors[3],
-            inactive_text   = "❈",
+            # inactive_text   = "❈",
+            inactive_text   = "•",
             inactive_color  = colors[1],
             padding         = 1,
             background      = colors[0],
