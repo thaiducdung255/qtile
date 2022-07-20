@@ -361,13 +361,13 @@ def init_widgets_list():
 
         # 2
         widget.CurrentScreen(
-            active_text     = "◉",
+            active_text     = "❇",
             active_color    = colors[3],
-            inactive_text   = "◉",
+            inactive_text   = "❈",
             inactive_color  = colors[1],
             padding         = 1,
             background      = colors[0],
-            fontsize        = 20
+            fontsize        = 24
         ),
 
         # 3
@@ -423,7 +423,7 @@ def init_widgets_list():
 
         # 8
         widget.Net(
-            format          = '{down} ↓↑{up}  ',
+            format          = '{down} ↕{up}  ',
             padding         = 10,
             foreground      = colors[2],
             background      = colors[0],
@@ -462,12 +462,21 @@ def init_widgets_list():
         ),
 
         # 12
+        widget.TextBox(
+            fmt        = ' ☀',
+            fontsize   = 20,
+            foreground = colors[2],
+            background = colors[0],
+            padding    = 0,
+        ),
+
+        # 13
         widget.Clock(
             update_interval = 60,
             format          = "%a, %H:%M (%d/%m)",
             foreground      = colors[2],
             background      = colors[0],
-            padding         = 10
+            padding         = 5
         ),
     ]
 
