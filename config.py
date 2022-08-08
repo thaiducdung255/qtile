@@ -304,8 +304,20 @@ if keyboardLayout == "colemak":
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
 for i, (name, kwargs) in enumerate(group_names, 1):
-    keys.append(Key([secondary_mod], group_keys[str(i)], lazy.group[name].toscreen()))
-    keys.append(Key([secondary_mod, "shift"], group_keys[str(i)], lazy.window.togroup(name)))
+    keys.append(
+        Key(
+            [secondary_mod], group_keys[str(i)],
+            lazy.group[name].toscreen()
+        )
+    )
+
+    keys.append(
+        Key(
+            [secondary_mod, "shift"], group_keys[str(i)],
+            lazy.window.togroup(name),
+            lazy.group[name].toscreen()
+        )
+    )
 
 layout_theme = {
     "border_width":     1,
