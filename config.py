@@ -315,7 +315,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
         Key(
             [secondary_mod, "shift"], group_keys[str(i)],
             lazy.window.togroup(name),
-            lazy.group[name].toscreen()
+            # lazy.group[name].toscreen()
         )
     )
 
