@@ -5,16 +5,14 @@ import subprocess
 from libqtile import bar, hook, layout, widget
 from libqtile.command import lazy
 from libqtile.config import Group, Key, Match, Screen
-from libqtile.lazy import lazy
 
-mod = "mod1"
-secondary_mod = "mod4"
-extra_mod = "mod5"
-myTerm = "kitty"
+MOD = "mod1"
+MOD4 = "mod4"
+MOD5 = "mod5"
+TERM = "kitty"
 home = os.path.expanduser("~")
-qtile_dir = home + "/.config/qtile"
-myConfig = home + "/.config/qtile/config.py"
-keyboardLayout = "colemak"
+QTILE_DIR = home + "/.config/qtile"
+KEYBOARD_LAYOUT = "colemak"
 
 customKeymap = {
     "left": "h",
@@ -24,7 +22,7 @@ customKeymap = {
     "normal": "n",
 }
 
-if keyboardLayout == "colemak":
+if KEYBOARD_LAYOUT == "colemak":
     customKeymap = {
         "left": "h",
         "right": "i",
@@ -35,171 +33,165 @@ if keyboardLayout == "colemak":
 
 keys = [
     # The essentials
-    Key([mod], "Return", lazy.spawn(myTerm), desc="Launches My Terminal"),
+    Key([MOD], "Return", lazy.spawn(TERM), desc="Launches My Terminal"),
     Key(
-        [mod],
+        [MOD],
         "Escape",
         lazy.spawn(home + "/.config/rofi/scripts/menu.sh"),
         desc="Rofi show running applications",
     ),
     Key(
-        [mod],
+        [MOD],
         "Tab",
         lazy.spawn(home + "/.config/rofi/scripts/index.sh"),
         desc="Rofi show running applications",
     ),
     Key(
-        [mod],
+        [MOD],
         "c",
         lazy.spawn("google-chrome-stable"),
         desc="Start web browser",
     ),
     Key(
-        [mod],
+        [MOD],
         "b",
         lazy.spawn("brave"),
         desc="Start web browser",
     ),
     Key(
-        [mod],
+        [MOD],
         "space",
         lazy.next_layout(),
         desc="Toggle through layouts",
     ),
     Key(
-        [mod, "shift"],
+        [MOD, "shift"],
         "semicolon",
         lazy.window.kill(),
         desc="Kill active window",
     ),
     Key(
-        [secondary_mod],
+        [MOD, "shift"],
         "r",
         lazy.restart(),
         desc="Restart Qtile",
     ),
     Key(
-        [mod, "shift"],
+        [MOD, "shift"],
         "q",
         lazy.shutdown(),
         desc="Shutdown Qtile",
     ),
-    Key(
-        [secondary_mod, "shift"],
-        "r",
-        lazy.spawn("xmodmap " + qtile_dir + "/.init-scripts/xmodmap"),
-        desc="restore xmodmap",
-    ),
     # Switch focus of monitors
     Key(
-        [mod],
+        [MOD],
         "semicolon",
         lazy.next_screen(),
         desc="Move focus to next monitor",
     ),
     # Window controls
     Key(
-        [mod],
+        [MOD],
         customKeymap["left"],
         lazy.layout.left(),
         desc="Move focus left in current stack pane",
     ),
     Key(
-        [mod],
+        [MOD],
         customKeymap["right"],
         lazy.layout.right(),
         desc="Move focus right in current stack pane",
     ),
     Key(
-        [mod],
+        [MOD],
         customKeymap["down"],
         lazy.layout.down(),
         desc="Move focus down in current stack pane",
     ),
     Key(
-        [mod],
+        [MOD],
         customKeymap["up"],
         lazy.layout.up(),
         desc="Move focus up in current stack pane",
     ),
     Key(
-        [mod, "shift"],
+        [MOD, "shift"],
         customKeymap["left"],
         lazy.layout.swap_left(),
         desc="Move windows left in current stack",
     ),
     Key(
-        [mod, "shift"],
+        [MOD, "shift"],
         customKeymap["left"],
         lazy.layout.swap_right(),
         lazy.layout.left(),
         desc="Move windows right in current stack",
     ),
     Key(
-        [mod, "shift"],
+        [MOD, "shift"],
         customKeymap["down"],
         lazy.layout.shuffle_down(),
         desc="Move windows down in current stack",
     ),
     Key(
-        [mod, "shift"],
+        [MOD, "shift"],
         customKeymap["up"],
         lazy.layout.shuffle_up(),
         desc="Move windows up in current stack",
     ),
     Key(
-        [mod, "shift"],
+        [MOD, "shift"],
         "period",
         lazy.layout.increase_nmaster(),
         desc="increase number in master pane (Tile)",
     ),
     Key(
-        [mod, "shift"],
+        [MOD, "shift"],
         "comma",
         lazy.layout.decrease_nmaster(),
         desc="decrease number in master pane (Tile)",
     ),
     Key(
-        [mod],
+        [MOD],
         "period",
         lazy.layout.grow(),
         lazy.layout.increase_ratio(),
         desc="increase number in master pane (Tile)",
     ),
     Key(
-        [mod],
+        [MOD],
         "comma",
         lazy.layout.shrink(),
         lazy.layout.decrease_ratio(),
         desc="decrease number in master pane (Tile)",
     ),
     Key(
-        [mod],
+        [MOD],
         customKeymap["normal"],
         lazy.layout.normalize(),
         desc="normalize window size ratios",
     ),
     Key(
-        [mod],
+        [MOD],
         "m",
         lazy.layout.maximize(),
         desc="toggle window between minimum and maximum sizes",
     ),
     Key(
-        [secondary_mod],
+        [MOD4],
         "m",
         lazy.window.toggle_fullscreen(),
         desc="toggle fullscreen",
     ),
     # Stack controls
     Key(
-        [mod, "shift"],
+        [MOD, "shift"],
         "space",
         lazy.layout.flip(),
         desc="Switch which side main pane occupies (XmonadTall)",
     ),
     Key(
-        [mod, "control"],
+        [MOD, "control"],
         "Return",
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
@@ -208,7 +200,7 @@ keys = [
     Key(
         [],
         "F3",
-        lazy.spawn(qtile_dir + "/.init-scripts/volume-mute-toggle.sh"),
+        lazy.spawn(QTILE_DIR + "/.init-scripts/volume-mute-toggle.sh"),
         desc="Toggle mute/unmute",
     ),
     Key(
@@ -226,67 +218,67 @@ keys = [
         desc="Increase volume",
     ),
     Key(
-        [secondary_mod, "shift"],
+        [MOD4, "shift"],
         "3",
-        lazy.spawn("sh " + qtile_dir + "/.init-scripts/toggle-touchpad.sh 0"),
+        lazy.spawn("sh " + QTILE_DIR + "/.init-scripts/toggle-touchpad.sh 0"),
         desc="disable touchpad",
     ),
     Key(
-        [secondary_mod],
+        [MOD4],
         "3",
-        lazy.spawn("sh " + qtile_dir + "/.init-scripts/toggle-touchpad.sh 1"),
+        lazy.spawn("sh " + QTILE_DIR + "/.init-scripts/toggle-touchpad.sh 1"),
         desc="enable touchpad",
     ),
     # Brightness control
     # monitor #1
     Key(
-        [secondary_mod],
+        [MOD4],
         "1",
-        lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh inc 0"),
+        lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh inc 0"),
         desc="Increase brightness",
     ),
     Key(
-        [secondary_mod, "shift"],
+        [MOD4, "shift"],
         "1",
-        lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh des 0"),
+        lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh des 0"),
         desc="Decrease brightness",
     ),
     Key(
-        [secondary_mod, "control"],
+        [MOD4, "control"],
         "1",
-        lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh dim 0"),
+        lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh dim 0"),
         desc="Dim screen",
     ),
     # monitor #2
     Key(
-        [secondary_mod],
+        [MOD4],
         "2",
-        lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh inc 1"),
+        lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh inc 1"),
         desc="Increase brightness",
     ),
     Key(
-        [secondary_mod, "shift"],
+        [MOD4, "shift"],
         "2",
-        lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh des 1"),
+        lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh des 1"),
         desc="Decrease brightness",
     ),
     Key(
-        [secondary_mod, "control"],
+        [MOD4, "control"],
         "2",
-        lazy.spawn(qtile_dir + "/.init-scripts/brightness.sh dim 1"),
+        lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh dim 1"),
         desc="Dim screen",
     ),
     # Power control
     Key(
-        [secondary_mod],
+        [MOD4],
         "x",
         lazy.spawn("dm-tool lock"),
         desc="Lock screen",
     ),
     Key(
-        [secondary_mod],
+        [MOD4],
         "Escape",
-        lazy.spawn("/usr/bin/zsh " + qtile_dir + "/.init-scripts/power-v2.sh"),
+        lazy.spawn("/usr/bin/zsh " + QTILE_DIR + "/.init-scripts/power-v2.sh"),
         desc="Power management",
     ),
 ]
@@ -313,37 +305,43 @@ group_keys = {
     "8": "p",
 }
 
-if keyboardLayout == "colemak":
+if KEYBOARD_LAYOUT == "colemak":
     group_keys = {
-        "1": "n",
-        "2": "e",
-        "3": "i",
-        "4": "o",
-        "5": "l",
-        "6": "u",
-        "7": "y",
-        "8": "semicolon",
+        "1": "a",
+        "2": "r",
+        "3": "s",
+        "4": "t",
+        "5": "q",
+        "6": "w",
+        "7": "f",
+        "8": "p",
     }
 
     group_names = [
-        ("Nakir", {"layout": "monadtall"}),
-        ("Eleleth", {"layout": "monadtall"}),
-        ("Israfil", {"layout": "monadtall"}),
-        ("Orifiel", {"layout": "monadtall"}),
-        ("Laila", {"layout": "monadtall"}),
-        ("Uriel", {"layout": "monadtall"}),
-        ("Yomiel", {"layout": "monadtall"}),
-        ("Seraphina", {"layout": "monadtall"}),
+        ("Azazel", {"layout": "monadtall"}),
+        ("Rahab", {"layout": "monadtall"}),
+        ("Samkiel", {"layout": "monadtall"}),
+        ("Tagas", {"layout": "monadtall"}),
+        ("Qaspiel", {"layout": "monadtall"}),
+        ("Wormwood", {"layout": "monadtall"}),
+        ("Furfur", {"layout": "monadtall"}),
+        ("Purah", {"layout": "monadtall"}),
     ]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
 for i, (name, kwargs) in enumerate(group_names, 1):
-    keys.append(Key([secondary_mod], group_keys[str(i)], lazy.group[name].toscreen()))
+    keys.append(
+        Key(
+            [MOD4],
+            group_keys[str(i)],
+            lazy.group[name].toscreen(),
+        )
+    )
 
     keys.append(
         Key(
-            [secondary_mod, "shift"],
+            [MOD4, "control"],
             group_keys[str(i)],
             lazy.window.togroup(name),
             # lazy.group[name].toscreen()
@@ -607,7 +605,7 @@ focus_on_window_activation = "smart"
 @hook.subscribe.startup_once
 def start_once():
     """Bootstrap qtile."""
-    subprocess.call([qtile_dir + "/autostart.sh"])
+    subprocess.call([QTILE_DIR + "/autostart.sh"])
 
 
 wmname = "LG3D"
