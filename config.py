@@ -198,21 +198,21 @@ keys = [
     ),
     # Volume control
     Key(
-        [],
-        "F3",
+        [MOD4],
+        "c",
         lazy.spawn(QTILE_DIR + "/.init-scripts/volume-mute-toggle.sh"),
         desc="Toggle mute/unmute",
     ),
     Key(
-        [],
-        "F1",
+        [MOD4],
+        "z",
         lazy.spawn("amixer set Master 5%-"),
         lazy.spawn("pactl set-sink-volume 0 -5%"),
         desc="Decrease volume",
     ),
     Key(
-        [],
-        "F2",
+        [MOD4],
+        "x",
         lazy.spawn("amixer set Master 5%+"),
         lazy.spawn("pactl set-sink-volume 0 +5%"),
         desc="Increase volume",
@@ -270,8 +270,8 @@ keys = [
     ),
     # Power control
     Key(
-        [MOD4],
-        "x",
+        [MOD],
+        "l",
         lazy.spawn("dm-tool lock"),
         desc="Lock screen",
     ),
