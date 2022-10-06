@@ -20,6 +20,7 @@ customKeymap = {
     "up": "k",
     "down": "j",
     "normal": "n",
+    "next_screen": "semicolon",
 }
 
 if KEYBOARD_LAYOUT == "colemak":
@@ -29,6 +30,7 @@ if KEYBOARD_LAYOUT == "colemak":
         "up": "e",
         "down": "n",
         "normal": "k",
+        "next_screen": "o",
     }
 
 keys = [
@@ -66,7 +68,7 @@ keys = [
     ),
     Key(
         [MOD, "shift"],
-        "semicolon",
+        customKeymap["next_screen"],
         lazy.window.kill(),
         desc="Kill active window",
     ),
@@ -85,7 +87,7 @@ keys = [
     # Switch focus of monitors
     Key(
         [MOD],
-        "semicolon",
+        customKeymap["next_screen"],
         lazy.next_screen(),
         desc="Move focus to next monitor",
     ),
