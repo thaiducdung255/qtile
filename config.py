@@ -62,6 +62,12 @@ keys = [
     ),
     Key(
         [MOD],
+        "t",
+        lazy.spawn("neovide"),
+        desc="Start web browser",
+    ),
+    Key(
+        [MOD],
         "space",
         lazy.next_layout(),
         desc="Toggle through layouts",
