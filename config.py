@@ -8,7 +8,7 @@ from libqtile.config import Group, Key, Match, Screen
 
 MOD = "mod1"
 MOD4 = "mod4"
-MOD5 = "mod5"
+CONTROL = "control"
 TERM = "kitty"
 home = os.path.expanduser("~")
 QTILE_DIR = home + "/.config/qtile"
@@ -40,6 +40,12 @@ keys = [
         [MOD],
         "Escape",
         lazy.spawn(home + "/.config/rofi/scripts/menu.sh"),
+        desc="Rofi show running applications",
+    ),
+    Key(
+        [CONTROL],
+        "Escape",
+        lazy.spawn(home + "/.config/rofi/scripts/cmd.sh"),
         desc="Rofi show running applications",
     ),
     Key(
@@ -214,15 +220,15 @@ keys = [
     Key(
         [MOD4],
         "z",
-        lazy.spawn("amixer set Master 5%-"),
-        lazy.spawn("pactl set-sink-volume 0 -5%"),
+        lazy.spawn("amixer set Master 3%-"),
+        lazy.spawn("pactl set-sink-volume 0 -3%"),
         desc="Decrease volume",
     ),
     Key(
         [MOD4],
         "x",
-        lazy.spawn("amixer set Master 5%+"),
-        lazy.spawn("pactl set-sink-volume 0 +5%"),
+        lazy.spawn("amixer set Master 3%+"),
+        lazy.spawn("pactl set-sink-volume 0 +3%"),
         desc="Increase volume",
     ),
     Key(
@@ -358,7 +364,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 layout_theme = {
     "border_width": 1,
-    "margin": 0,
+    "margin": 1,
     "border_focus": "green",
     "border_normal": "1D2330",
     "max_ratio": 0.75,
@@ -584,6 +590,7 @@ def window_to_next_screen(qtile):
 
 
 def switch_screens(qtile):
+    """Switch screen configs."""
     i = qtile.screens.index(qtile.current_screen)
     group = qtile.screens[i - 1].group
     qtile.current_screen.set_group(group)
