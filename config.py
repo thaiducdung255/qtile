@@ -1,6 +1,7 @@
 """Config Qtile."""
 import os
 import subprocess
+from typing import Any, List
 
 from libqtile import bar, hook, layout, widget
 from libqtile.command import lazy
@@ -10,11 +11,11 @@ MOD = "mod1"
 MOD4 = "mod4"
 CONTROL = "control"
 TERM = "kitty"
-home = os.path.expanduser("~")
-QTILE_DIR = home + "/.config/qtile"
+HOME = os.path.expanduser("~")
+QTILE_DIR = HOME + "/.config/qtile"
 KEYBOARD_LAYOUT = "colemak"
 
-customKeymap = {
+CUSTOM_KEYMAP = {
     "left": "h",
     "right": "l",
     "up": "k",
@@ -24,7 +25,7 @@ customKeymap = {
 }
 
 if KEYBOARD_LAYOUT == "colemak":
-    customKeymap = {
+    CUSTOM_KEYMAP = {
         "left": "h",
         "right": "i",
         "up": "e",
@@ -39,19 +40,19 @@ keys = [
     Key(
         [MOD],
         "Escape",
-        lazy.spawn(home + "/.config/rofi/scripts/menu.sh"),
+        lazy.spawn(HOME + "/.config/rofi/scripts/menu.sh"),
         desc="Rofi show running applications",
     ),
     Key(
         [CONTROL],
         "Escape",
-        lazy.spawn(home + "/.config/rofi/scripts/cmd.sh"),
+        lazy.spawn(HOME + "/.config/rofi/scripts/cmd.sh"),
         desc="Rofi show running applications",
     ),
     Key(
         [MOD],
         "Tab",
-        lazy.spawn(home + "/.config/rofi/scripts/index.sh"),
+        lazy.spawn(HOME + "/.config/rofi/scripts/index.sh"),
         desc="Rofi show running applications",
     ),
     Key(
@@ -80,7 +81,7 @@ keys = [
     ),
     Key(
         [MOD, "shift"],
-        customKeymap["next_screen"],
+        CUSTOM_KEYMAP["next_screen"],
         lazy.window.kill(),
         desc="Kill active window",
     ),
@@ -99,57 +100,57 @@ keys = [
     # Switch focus of monitors
     Key(
         [MOD],
-        customKeymap["next_screen"],
+        CUSTOM_KEYMAP["next_screen"],
         lazy.next_screen(),
         desc="Move focus to next monitor",
     ),
     # Window controls
     Key(
         [MOD],
-        customKeymap["left"],
+        CUSTOM_KEYMAP["left"],
         lazy.layout.left(),
         desc="Move focus left in current stack pane",
     ),
     Key(
         [MOD],
-        customKeymap["right"],
+        CUSTOM_KEYMAP["right"],
         lazy.layout.right(),
         desc="Move focus right in current stack pane",
     ),
     Key(
         [MOD],
-        customKeymap["down"],
+        CUSTOM_KEYMAP["down"],
         lazy.layout.down(),
         desc="Move focus down in current stack pane",
     ),
     Key(
         [MOD],
-        customKeymap["up"],
+        CUSTOM_KEYMAP["up"],
         lazy.layout.up(),
         desc="Move focus up in current stack pane",
     ),
     Key(
         [MOD, "shift"],
-        customKeymap["left"],
+        CUSTOM_KEYMAP["left"],
         lazy.layout.swap_left(),
         desc="Move windows left in current stack",
     ),
     Key(
         [MOD, "shift"],
-        customKeymap["left"],
+        CUSTOM_KEYMAP["left"],
         lazy.layout.swap_right(),
         lazy.layout.left(),
         desc="Move windows right in current stack",
     ),
     Key(
         [MOD, "shift"],
-        customKeymap["down"],
+        CUSTOM_KEYMAP["down"],
         lazy.layout.shuffle_down(),
         desc="Move windows down in current stack",
     ),
     Key(
         [MOD, "shift"],
-        customKeymap["up"],
+        CUSTOM_KEYMAP["up"],
         lazy.layout.shuffle_up(),
         desc="Move windows up in current stack",
     ),
@@ -181,7 +182,7 @@ keys = [
     ),
     Key(
         [MOD],
-        customKeymap["normal"],
+        CUSTOM_KEYMAP["normal"],
         lazy.layout.normalize(),
         desc="normalize window size ratios",
     ),
@@ -596,10 +597,10 @@ def switch_screens(qtile):
     qtile.current_screen.set_group(group)
 
 
-mouse = []
+mouse: List[Any] = []
 
 dgroups_key_binder = None
-dgroups_app_rules = []
+dgroups_app_rules: List[Any] = []
 main = None
 follow_mouse_focus = True
 bring_front_click = True
