@@ -394,20 +394,21 @@ colors = [
 ]
 
 # DEFAULT WIDGET SETTINGS #####
-widget_defaults = dict(
-    font="Ubuntu Mono",
-    fontsize=16,
-    padding=5,
-    background=colors[6],
-    foreground=colors[2],
-    margin_y=3,
-)
+widget_defaults = {
+    "font": "Ubuntu Mono",
+    "fontsize": 16,
+    "padding": 5,
+    "background": colors[6],
+    "foreground": colors[2],
+    "margin_y": 3,
+}
+
 extension_defaults = widget_defaults.copy()
 
 
 def init_widgets_list():
     """Status bar config."""
-    widgets_list = [
+    widgets = [
         # 1
         widget.TextBox(
             fmt="",
@@ -524,21 +525,21 @@ def init_widgets_list():
     check_batt_output = check_batt_cmd.read()
 
     if len(check_batt_output) == 0:
-        widgets_list.pop(8)
+        widgets.pop(8)
 
-    return widgets_list
+    return widgets
 
 
 def init_widgets_screen1():
     """Status bar for screen #1."""
-    widgets_screen1 = init_widgets_list()
-    return widgets_screen1
+    widgets = init_widgets_list()
+    return widgets
 
 
 def init_widgets_screen2():
     """Status bar for screen #2."""
-    widgets_screen2 = init_widgets_list()
-    return widgets_screen2
+    widgets = init_widgets_list()
+    return widgets
 
 
 def init_screens():
@@ -563,37 +564,37 @@ if __name__ in ["config", "__main__"]:
 def window_to_prev_group(qtile):
     """Switch window to prev group."""
     if qtile.currentWindow is not None:
-        i = qtile.groups.index(qtile.currentGroup)
-        qtile.currentWindow.togroup(qtile.groups[i - 1].name)
+        group_idx = qtile.groups.index(qtile.currentGroup)
+        qtile.currentWindow.togroup(qtile.groups[group_idx - 1].name)
 
 
 def window_to_next_group(qtile):
     """Switch window to next group."""
     if qtile.currentWindow is not None:
-        i = qtile.groups.index(qtile.currentGroup)
-        qtile.currentWindow.togroup(qtile.groups[i + 1].name)
+        group_idx = qtile.groups.index(qtile.currentGroup)
+        qtile.currentWindow.togroup(qtile.groups[group_idx + 1].name)
 
 
 def window_to_previous_screen(qtile):
     """Switch window to prev screen."""
-    i = qtile.screens.index(qtile.current_screen)
-    if i != 0:
-        group = qtile.screens[i - 1].group.name
+    screen_idx = qtile.screens.index(qtile.current_screen)
+    if screen_idx != 0:
+        group = qtile.screens[screen_idx - 1].group.name
         qtile.current_window.togroup(group)
 
 
 def window_to_next_screen(qtile):
     """Switch window to next screen."""
-    i = qtile.screens.index(qtile.current_screen)
-    if i + 1 != len(qtile.screens):
-        group = qtile.screens[i + 1].group.name
+    screen_idx = qtile.screens.index(qtile.current_screen)
+    if screen_idx + 1 != len(qtile.screens):
+        group = qtile.screens[screen_idx + 1].group.name
         qtile.current_window.togroup(group)
 
 
 def switch_screens(qtile):
     """Switch screen configs."""
-    i = qtile.screens.index(qtile.current_screen)
-    group = qtile.screens[i - 1].group
+    screen_idx = qtile.screens.index(qtile.current_screen)
+    group = qtile.screens[screen_idx - 1].group
     qtile.current_screen.set_group(group)
 
 
