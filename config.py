@@ -516,7 +516,21 @@ def init_widgets_list():
             format="%a, %H:%M (%d/%m)",
             foreground=colors[2],
             background=colors[0],
-            padding=5,
+            padding=0,
+        ),
+        widget.CPU(
+            padding=10,
+            format="{load_percent}%",
+            foreground=colors[2],
+            background=colors[0],
+            update_interval=3,
+        ),
+        widget.Memory(
+            padding=0,
+            measure_mem="G",
+            foreground=colors[2],
+            background=colors[0],
+            update_interval=3,
         ),
     ]
 
