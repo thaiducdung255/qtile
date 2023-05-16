@@ -10,6 +10,7 @@ from libqtile.config import Group, Key, Match, Screen
 MOD = "mod1"
 MOD4 = "mod4"
 CONTROL = "control"
+SHIFT = "shift"
 TERM = "kitty"
 HOME = os.path.expanduser("~")
 QTILE_DIR = HOME + "/.config/qtile"
@@ -36,7 +37,7 @@ if KEYBOARD_LAYOUT == "colemak":
 
 keys = [
     # The essentials
-    Key([MOD], "Return", lazy.spawn(TERM), desc="Launches My Terminal"),
+    Key([MOD], "Return", lazy.spawn(TERM), desc="Launch default terminal"),
     Key(
         [MOD],
         "Escape",
@@ -57,20 +58,8 @@ keys = [
     ),
     Key(
         [MOD],
-        "c",
-        lazy.spawn("google-chrome-stable"),
-        desc="Start web browser",
-    ),
-    Key(
-        [MOD],
         "b",
         lazy.spawn("brave"),
-        desc="Start web browser",
-    ),
-    Key(
-        [MOD],
-        "t",
-        lazy.spawn("neovide"),
         desc="Start web browser",
     ),
     Key(
@@ -80,19 +69,19 @@ keys = [
         desc="Toggle through layouts",
     ),
     Key(
-        [MOD, "shift"],
+        [MOD, SHIFT],
         CUSTOM_KEYMAP["next_screen"],
         lazy.window.kill(),
         desc="Kill active window",
     ),
     Key(
-        [MOD, "shift"],
+        [MOD, SHIFT],
         "r",
         lazy.restart(),
         desc="Restart Qtile",
     ),
     Key(
-        [MOD, "shift"],
+        [MOD, SHIFT],
         "q",
         lazy.shutdown(),
         desc="Shutdown Qtile",
@@ -130,38 +119,38 @@ keys = [
         desc="Move focus up in current stack pane",
     ),
     Key(
-        [MOD, "shift"],
+        [MOD, SHIFT],
         CUSTOM_KEYMAP["left"],
         lazy.layout.swap_left(),
         desc="Move windows left in current stack",
     ),
     Key(
-        [MOD, "shift"],
+        [MOD, SHIFT],
         CUSTOM_KEYMAP["left"],
         lazy.layout.swap_right(),
         lazy.layout.left(),
         desc="Move windows right in current stack",
     ),
     Key(
-        [MOD, "shift"],
+        [MOD, SHIFT],
         CUSTOM_KEYMAP["down"],
         lazy.layout.shuffle_down(),
         desc="Move windows down in current stack",
     ),
     Key(
-        [MOD, "shift"],
+        [MOD, SHIFT],
         CUSTOM_KEYMAP["up"],
         lazy.layout.shuffle_up(),
         desc="Move windows up in current stack",
     ),
     Key(
-        [MOD, "shift"],
+        [MOD, SHIFT],
         "period",
         lazy.layout.increase_nmaster(),
         desc="increase number in master pane (Tile)",
     ),
     Key(
-        [MOD, "shift"],
+        [MOD, SHIFT],
         "comma",
         lazy.layout.decrease_nmaster(),
         desc="decrease number in master pane (Tile)",
@@ -193,20 +182,33 @@ keys = [
         desc="toggle window between minimum and maximum sizes",
     ),
     Key(
-        [MOD4],
+        [MOD4, CONTROL],
         "m",
         lazy.window.toggle_fullscreen(),
         desc="toggle fullscreen",
     ),
+    # Group controls
+    Key(
+        [MOD4],
+        "m",
+        lazy.screen.next_group(),
+        desc="navigate to next group",
+    ),
+    Key(
+        [MOD4],
+        "k",
+        lazy.screen.prev_group(),
+        desc="navigate to previous group",
+    ),
     # Stack controls
     Key(
-        [MOD, "shift"],
+        [MOD, SHIFT],
         "space",
         lazy.layout.flip(),
         desc="Switch which side main pane occupies (XmonadTall)",
     ),
     Key(
-        [MOD, "control"],
+        [MOD, CONTROL],
         "Return",
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
@@ -233,7 +235,7 @@ keys = [
         desc="Increase volume",
     ),
     Key(
-        [MOD4, "shift"],
+        [MOD4, SHIFT],
         "3",
         lazy.spawn("sh " + QTILE_DIR + "/.init-scripts/toggle-touchpad.sh 0"),
         desc="disable touchpad",
@@ -253,13 +255,13 @@ keys = [
         desc="Increase brightness",
     ),
     Key(
-        [MOD4, "shift"],
+        [MOD4, SHIFT],
         "1",
         lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh des 0"),
         desc="Decrease brightness",
     ),
     Key(
-        [MOD4, "control"],
+        [MOD4, CONTROL],
         "1",
         lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh dim 0"),
         desc="Dim screen",
@@ -272,13 +274,13 @@ keys = [
         desc="Increase brightness",
     ),
     Key(
-        [MOD4, "shift"],
+        [MOD4, SHIFT],
         "2",
         lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh des 1"),
         desc="Decrease brightness",
     ),
     Key(
-        [MOD4, "control"],
+        [MOD4, CONTROL],
         "2",
         lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh dim 1"),
         desc="Dim screen",
@@ -322,25 +324,44 @@ group_keys = {
 
 if KEYBOARD_LAYOUT == "colemak":
     group_keys = {
-        "1": "a",
-        "2": "r",
-        "3": "s",
-        "4": "t",
-        "5": "q",
-        "6": "w",
-        "7": "f",
-        "8": "p",
+        # "1": "a",
+        # "2": "r",
+        # "3": "s",
+        # "4": "t",
+        # "5": "q",
+        # "6": "w",
+        # "7": "f",
+        # "8": "p",
+
+        "1": "n",
+        "2": "e",
+        "3": "i",
+        "4": "o",
+        "5": "l",
+        "6": "u",
+        "7": "y",
+        "8": "semicolon",
     }
 
     group_names = [
-        ("Azazel", {"layout": "monadtall"}),
-        ("Rahab", {"layout": "monadtall"}),
-        ("Samkiel", {"layout": "monadtall"}),
-        ("Tagas", {"layout": "monadtall"}),
-        ("Qaspiel", {"layout": "monadtall"}),
-        ("Wormwood", {"layout": "monadtall"}),
-        ("Furfur", {"layout": "monadtall"}),
+        # ("Azazel", {"layout": "monadtall"}),
+        # ("Rahab", {"layout": "monadtall"}),
+        # ("Samkiel", {"layout": "monadtall"}),
+        # ("Tagas", {"layout": "monadtall"}),
+        # ("Qaspiel", {"layout": "monadtall"}),
+        # ("Wormwood", {"layout": "monadtall"}),
+        # ("Furfur", {"layout": "monadtall"}),
+        # ("Purah", {"layout": "monadtall"}),
+
+        ("Nergal", {"layout": "monadtall"}),
+        ("Emma-O", {"layout": "monadtall"}),
+        ("Ishtar", {"layout": "monadtall"}),
+        ("O-Yama", {"layout": "monadtall"}),
+        ("Loki", {"layout": "monadtall"}),
+        ("Ukobach", {"layout": "monadtall"}),
+        ("Yaotzin", {"layout": "monadtall"}),
         ("Purah", {"layout": "monadtall"}),
+
     ]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
@@ -356,7 +377,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
     keys.append(
         Key(
-            [MOD4, "control"],
+            [MOD4, CONTROL],
             group_keys[str(i)],
             lazy.window.togroup(name),
             # lazy.group[name].toscreen()
@@ -428,7 +449,11 @@ def init_widgets_list():
             fontsize=24,
         ),
         # 3
-        widget.Sep(padding=5, background=colors[0], foreground=colors[0]),
+        widget.Sep(
+            padding=5,
+            background=colors[0],
+            foreground=colors[0],
+        ),
         # 4
         widget.GroupBox(
             background=colors[0],
@@ -457,7 +482,10 @@ def init_widgets_list():
             background=colors[1],
         ),
         # 6
-        widget.Spacer(length=bar.STRETCH, background=colors[1]),
+        widget.Spacer(
+            length=bar.STRETCH,
+            background=colors[1],
+            ),
         # 7
         widget.TextBox(
             fmt="",
@@ -468,12 +496,12 @@ def init_widgets_list():
         ),
         # 8
         widget.Net(
-            format="{down} ↕{up}  ",
+            format="{down} ↕{up} ",
             padding=10,
             foreground=colors[2],
             background=colors[0],
             use_bits=False,
-            update_interval=5,
+            update_interval=10,
         ),
         # 9
         widget.Battery(
@@ -481,7 +509,7 @@ def init_widgets_list():
             charge_char=" ",
             full_char=" ",
             unknown_char=" ",
-            update_interval=5,
+            update_interval=9,
             format="{char}{percent:2.0%} ",
             foreground=colors[2],
             background=colors[0],
@@ -516,21 +544,28 @@ def init_widgets_list():
             format="%a, %H:%M (%d/%m)",
             foreground=colors[2],
             background=colors[0],
-            padding=0,
+            padding=4,
         ),
         widget.CPU(
             padding=10,
             format="{load_percent}%",
             foreground=colors[2],
             background=colors[0],
-            update_interval=3,
+            update_interval=8,
         ),
         widget.Memory(
             padding=0,
             measure_mem="G",
             foreground=colors[2],
             background=colors[0],
-            update_interval=3,
+            update_interval=7,
+        ),
+        widget.TextBox(
+            fmt="  ",
+            fontsize=20,
+            foreground=colors[2],
+            background=colors[0],
+            padding=0,
         ),
     ]
 
@@ -573,44 +608,6 @@ if __name__ in ["config", "__main__"]:
     widgets_list = init_widgets_list()
     widgets_screen1 = init_widgets_screen1()
     widgets_screen2 = init_widgets_screen2()
-
-
-def window_to_prev_group(qtile):
-    """Switch window to prev group."""
-    if qtile.currentWindow is not None:
-        group_idx = qtile.groups.index(qtile.currentGroup)
-        qtile.currentWindow.togroup(qtile.groups[group_idx - 1].name)
-
-
-def window_to_next_group(qtile):
-    """Switch window to next group."""
-    if qtile.currentWindow is not None:
-        group_idx = qtile.groups.index(qtile.currentGroup)
-        qtile.currentWindow.togroup(qtile.groups[group_idx + 1].name)
-
-
-def window_to_previous_screen(qtile):
-    """Switch window to prev screen."""
-    screen_idx = qtile.screens.index(qtile.current_screen)
-    if screen_idx != 0:
-        group = qtile.screens[screen_idx - 1].group.name
-        qtile.current_window.togroup(group)
-
-
-def window_to_next_screen(qtile):
-    """Switch window to next screen."""
-    screen_idx = qtile.screens.index(qtile.current_screen)
-    if screen_idx + 1 != len(qtile.screens):
-        group = qtile.screens[screen_idx + 1].group.name
-        qtile.current_window.togroup(group)
-
-
-def switch_screens(qtile):
-    """Switch screen configs."""
-    screen_idx = qtile.screens.index(qtile.current_screen)
-    group = qtile.screens[screen_idx - 1].group
-    qtile.current_screen.set_group(group)
-
 
 mouse: List[Any] = []
 
