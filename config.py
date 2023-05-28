@@ -517,8 +517,8 @@ def init_widgets_list():
         ),
         # 10
         widget.TextBox(
-            fmt="",
             fontsize=23,
+            fmt="",
             foreground=colors[2],
             background=colors[0],
             padding=0,
