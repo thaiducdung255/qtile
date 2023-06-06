@@ -416,7 +416,7 @@ colors = [
 
 # DEFAULT WIDGET SETTINGS #####
 widget_defaults = {
-    "font": "Ubuntu Mono",
+    "font": "FiraCode Nerd Font Mono 12",
     "fontsize": 16,
     "padding": 5,
     "background": colors[6],
