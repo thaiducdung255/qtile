@@ -496,7 +496,7 @@ def init_widgets_list():
         ),
         # 8
         widget.Net(
-            format="{down} ↕{up} ",
+            format="{down}/{up} ",
             padding=10,
             foreground=colors[2],
             background=colors[0],
@@ -541,7 +541,7 @@ def init_widgets_list():
         # 13
         widget.Clock(
             update_interval=60,
-            format="%a, %H:%M (%d/%m)",
+            format="%a,%H:%M(%d/%m)",
             foreground=colors[2],
             background=colors[0],
             padding=4,
@@ -623,6 +623,8 @@ floating_layout = layout.Floating(
         *layout.Floating.default_float_rules,
         Match(wm_class="xmessage"),
         Match(wm_class="Pavucontrol"),
+        Match(wm_class="Blueman-manager"),
+        Match(wm_class="Arandr"),
     ]
 )
 
