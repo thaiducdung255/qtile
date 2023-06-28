@@ -7,6 +7,7 @@ from libqtile import bar, hook, layout, widget
 from libqtile.command import lazy
 from libqtile.config import Group, Key, Match, Screen
 
+MOUSE_MOV_DIFF = 20
 MOD = "mod1"
 MOD4 = "mod4"
 CONTROL = "control"
@@ -297,6 +298,43 @@ keys = [
         "Escape",
         lazy.spawn("/usr/bin/zsh " + QTILE_DIR + "/.init-scripts/power-v2.sh"),
         desc="Power management",
+    ),
+    # Mouse control
+    Key(
+        [CONTROL],
+        "Return",
+        lazy.spawn("xdotool click 1"),
+        desc="Move left click",
+    ),
+    Key(
+        [CONTROL, SHIFT],
+        "Return",
+        lazy.spawn("xdotool click 3"),
+        desc="Move right click",
+    ),
+    Key(
+        [CONTROL],
+        "l",
+        lazy.spawn(f"xdotool mousemove_relative -- -{MOUSE_MOV_DIFF} 0"),
+        desc="Move mouse left",
+    ),
+    Key(
+        [CONTROL],
+        "u",
+        lazy.spawn(f"xdotool mousemove_relative 0 {MOUSE_MOV_DIFF}"),
+        desc="Move mouse up",
+    ),
+    Key(
+        [CONTROL],
+        "y",
+        lazy.spawn(f"xdotool mousemove_relative 0 -{MOUSE_MOV_DIFF}"),
+        desc="Move mouse down",
+    ),
+    Key(
+        [CONTROL],
+        "semicolon",
+        lazy.spawn(f"xdotool mousemove_relative {MOUSE_MOV_DIFF} 0"),
+        desc="Move mouse right",
     ),
 ]
 
