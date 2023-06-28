@@ -472,6 +472,7 @@ def init_widgets_list():
             this_screen_border=colors[4],
             other_current_screen_border=colors[1],
             other_screen_border=colors[1],
+            font="FiraCode Nerd Font Mono",
         ),
         # 5
         widget.TextBox(
