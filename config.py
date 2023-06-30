@@ -302,36 +302,36 @@ keys = [
     # Mouse control
     Key(
         [CONTROL],
-        "Return",
+        "k",
         lazy.spawn("xdotool click 1"),
         desc="Move left click",
     ),
     Key(
         [CONTROL, SHIFT],
-        "Return",
+        "k",
         lazy.spawn("xdotool click 3"),
         desc="Move right click",
     ),
     Key(
-        [CONTROL],
+        [CONTROL, SHIFT],
         "l",
         lazy.spawn(f"xdotool mousemove_relative -- -{MOUSE_MOV_DIFF} 0"),
         desc="Move mouse left",
     ),
     Key(
-        [CONTROL],
+        [CONTROL, SHIFT],
         "u",
         lazy.spawn(f"xdotool mousemove_relative 0 {MOUSE_MOV_DIFF}"),
         desc="Move mouse up",
     ),
     Key(
-        [CONTROL],
+        [CONTROL, SHIFT],
         "y",
         lazy.spawn(f"xdotool mousemove_relative 0 -{MOUSE_MOV_DIFF}"),
         desc="Move mouse down",
     ),
     Key(
-        [CONTROL],
+        [CONTROL, SHIFT],
         "semicolon",
         lazy.spawn(f"xdotool mousemove_relative {MOUSE_MOV_DIFF} 0"),
         desc="Move mouse right",
