@@ -8,8 +8,8 @@ from libqtile.command import lazy
 from libqtile.config import Group, Key, Match, Screen
 
 MOUSE_MOV_DIFF = 20
-MOD = "mod1"
-MOD4 = "mod4"
+ALT = "mod1"
+WIN = "mod4"
 CONTROL = "control"
 SHIFT = "shift"
 TERM = "kitty"
@@ -38,9 +38,9 @@ if KEYBOARD_LAYOUT == "colemak":
 
 keys = [
     # The essentials
-    Key([MOD], "Return", lazy.spawn(TERM), desc="Launch default terminal"),
+    Key([ALT], "Return", lazy.spawn(TERM), desc="Launch default terminal"),
     Key(
-        [MOD],
+        [ALT],
         "Escape",
         lazy.spawn(HOME + "/.config/rofi/scripts/menu.sh"),
         desc="Rofi show running applications",
@@ -52,197 +52,197 @@ keys = [
         desc="Rofi show running applications",
     ),
     Key(
-        [MOD],
+        [ALT],
         "Tab",
         lazy.spawn(HOME + "/.config/rofi/scripts/index.sh"),
         desc="Rofi show running applications",
     ),
     Key(
-        [MOD],
+        [ALT],
         "b",
         lazy.spawn("brave"),
         desc="Start web browser",
     ),
     Key(
-        [MOD],
+        [ALT],
         "space",
         lazy.next_layout(),
         desc="Toggle through layouts",
     ),
     Key(
-        [MOD, SHIFT],
+        [ALT, SHIFT],
         CUSTOM_KEYMAP["next_screen"],
         lazy.window.kill(),
         desc="Kill active window",
     ),
     Key(
-        [MOD, SHIFT],
+        [ALT, SHIFT],
         "r",
         lazy.restart(),
         desc="Restart Qtile",
     ),
     Key(
-        [MOD, SHIFT],
+        [ALT, SHIFT],
         "q",
         lazy.shutdown(),
         desc="Shutdown Qtile",
     ),
     # Switch focus of monitors
     Key(
-        [MOD],
+        [ALT],
         CUSTOM_KEYMAP["next_screen"],
         lazy.next_screen(),
         desc="Move focus to next monitor",
     ),
     # Window controls
     Key(
-        [MOD],
+        [ALT],
         CUSTOM_KEYMAP["left"],
         lazy.layout.left(),
         desc="Move focus left in current stack pane",
     ),
     Key(
-        [MOD],
+        [ALT],
         CUSTOM_KEYMAP["right"],
         lazy.layout.right(),
         desc="Move focus right in current stack pane",
     ),
     Key(
-        [MOD],
+        [ALT],
         CUSTOM_KEYMAP["down"],
         lazy.layout.down(),
         desc="Move focus down in current stack pane",
     ),
     Key(
-        [MOD],
+        [ALT],
         CUSTOM_KEYMAP["up"],
         lazy.layout.up(),
         desc="Move focus up in current stack pane",
     ),
     Key(
-        [MOD, SHIFT],
+        [ALT, SHIFT],
         CUSTOM_KEYMAP["left"],
         lazy.layout.swap_left(),
         desc="Move windows left in current stack",
     ),
     Key(
-        [MOD, SHIFT],
+        [ALT, SHIFT],
         CUSTOM_KEYMAP["left"],
         lazy.layout.swap_right(),
         lazy.layout.left(),
         desc="Move windows right in current stack",
     ),
     Key(
-        [MOD, SHIFT],
+        [ALT, SHIFT],
         CUSTOM_KEYMAP["down"],
         lazy.layout.shuffle_down(),
         desc="Move windows down in current stack",
     ),
     Key(
-        [MOD, SHIFT],
+        [ALT, SHIFT],
         CUSTOM_KEYMAP["up"],
         lazy.layout.shuffle_up(),
         desc="Move windows up in current stack",
     ),
     Key(
-        [MOD, SHIFT],
+        [ALT, SHIFT],
         "period",
         lazy.layout.increase_nmaster(),
         desc="increase number in master pane (Tile)",
     ),
     Key(
-        [MOD, SHIFT],
+        [ALT, SHIFT],
         "comma",
         lazy.layout.decrease_nmaster(),
         desc="decrease number in master pane (Tile)",
     ),
     Key(
-        [MOD],
+        [ALT],
         "period",
         lazy.layout.grow(),
         lazy.layout.increase_ratio(),
         desc="increase number in master pane (Tile)",
     ),
     Key(
-        [MOD],
+        [ALT],
         "comma",
         lazy.layout.shrink(),
         lazy.layout.decrease_ratio(),
         desc="decrease number in master pane (Tile)",
     ),
     Key(
-        [MOD],
+        [ALT],
         CUSTOM_KEYMAP["normal"],
         lazy.layout.normalize(),
         desc="normalize window size ratios",
     ),
     Key(
-        [MOD],
+        [ALT],
         "m",
         lazy.layout.maximize(),
         desc="toggle window between minimum and maximum sizes",
     ),
     Key(
-        [MOD4, CONTROL],
+        [WIN, CONTROL],
         "m",
         lazy.window.toggle_fullscreen(),
         desc="toggle fullscreen",
     ),
     # Group controls
     Key(
-        [MOD4],
+        [WIN],
         "m",
         lazy.screen.next_group(),
         desc="navigate to next group",
     ),
     Key(
-        [MOD4],
+        [WIN],
         "k",
         lazy.screen.prev_group(),
         desc="navigate to previous group",
     ),
     # Stack controls
     Key(
-        [MOD, SHIFT],
+        [ALT, SHIFT],
         "space",
         lazy.layout.flip(),
         desc="Switch which side main pane occupies (XmonadTall)",
     ),
     Key(
-        [MOD, CONTROL],
+        [ALT, CONTROL],
         "Return",
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
     # Volume control
     Key(
-        [MOD4],
+        [WIN],
         "c",
         lazy.spawn(QTILE_DIR + "/.init-scripts/volume-mute-toggle.sh"),
         desc="Toggle mute/unmute",
     ),
     Key(
-        [MOD4],
+        [WIN],
         "z",
         lazy.spawn("amixer set Master 3%-"),
         lazy.spawn("pactl set-sink-volume 0 -3%"),
         desc="Decrease volume",
     ),
     Key(
-        [MOD4],
+        [WIN],
         "x",
         lazy.spawn("amixer set Master 3%+"),
         lazy.spawn("pactl set-sink-volume 0 +3%"),
         desc="Increase volume",
     ),
     Key(
-        [MOD4, SHIFT],
+        [WIN, SHIFT],
         "3",
         lazy.spawn("sh " + QTILE_DIR + "/.init-scripts/toggle-touchpad.sh 0"),
         desc="disable touchpad",
     ),
     Key(
-        [MOD4],
+        [WIN],
         "3",
         lazy.spawn("sh " + QTILE_DIR + "/.init-scripts/toggle-touchpad.sh 1"),
         desc="enable touchpad",
@@ -250,51 +250,51 @@ keys = [
     # Brightness control
     # monitor #1
     Key(
-        [MOD4],
+        [WIN],
         "1",
         lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh inc 0"),
         desc="Increase brightness",
     ),
     Key(
-        [MOD4, SHIFT],
+        [WIN, SHIFT],
         "1",
         lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh des 0"),
         desc="Decrease brightness",
     ),
     Key(
-        [MOD4, CONTROL],
+        [WIN, CONTROL],
         "1",
         lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh dim 0"),
         desc="Dim screen",
     ),
     # monitor #2
     Key(
-        [MOD4],
+        [WIN],
         "2",
         lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh inc 1"),
         desc="Increase brightness",
     ),
     Key(
-        [MOD4, SHIFT],
+        [WIN, SHIFT],
         "2",
         lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh des 1"),
         desc="Decrease brightness",
     ),
     Key(
-        [MOD4, CONTROL],
+        [WIN, CONTROL],
         "2",
         lazy.spawn(QTILE_DIR + "/.init-scripts/brightness.sh dim 1"),
         desc="Dim screen",
     ),
     # Power control
     Key(
-        [MOD],
+        [WIN],
         "l",
         lazy.spawn("dm-tool lock"),
         desc="Lock screen",
     ),
     Key(
-        [MOD4],
+        [WIN],
         "Escape",
         lazy.spawn("/usr/bin/zsh " + QTILE_DIR + "/.init-scripts/power-v2.sh"),
         desc="Power management",
@@ -302,36 +302,36 @@ keys = [
     # Mouse control
     Key(
         [CONTROL],
-        "k",
+        "SPACE",
         lazy.spawn("xdotool click 1"),
         desc="Move left click",
     ),
     Key(
         [CONTROL, SHIFT],
-        "k",
+        "SPACE",
         lazy.spawn("xdotool click 3"),
         desc="Move right click",
     ),
     Key(
-        [CONTROL, SHIFT],
+        [ALT],
         "l",
         lazy.spawn(f"xdotool mousemove_relative -- -{MOUSE_MOV_DIFF} 0"),
         desc="Move mouse left",
     ),
     Key(
-        [CONTROL, SHIFT],
+        [ALT],
         "u",
         lazy.spawn(f"xdotool mousemove_relative 0 {MOUSE_MOV_DIFF}"),
         desc="Move mouse up",
     ),
     Key(
-        [CONTROL, SHIFT],
+        [ALT],
         "y",
         lazy.spawn(f"xdotool mousemove_relative 0 -{MOUSE_MOV_DIFF}"),
         desc="Move mouse down",
     ),
     Key(
-        [CONTROL, SHIFT],
+        [ALT],
         "semicolon",
         lazy.spawn(f"xdotool mousemove_relative {MOUSE_MOV_DIFF} 0"),
         desc="Move mouse right",
@@ -407,7 +407,7 @@ groups = [Group(name, **kwargs) for name, kwargs in group_names]
 for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(
         Key(
-            [MOD4],
+            [WIN],
             group_keys[str(i)],
             lazy.group[name].toscreen(),
         )
@@ -415,7 +415,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
     keys.append(
         Key(
-            [MOD4, CONTROL],
+            [WIN, CONTROL],
             group_keys[str(i)],
             lazy.window.togroup(name),
             # lazy.group[name].toscreen()
