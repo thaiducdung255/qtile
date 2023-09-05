@@ -7,6 +7,8 @@ from libqtile import bar, hook, layout, widget
 from libqtile.command import lazy
 from libqtile.config import Group, Key, Match, Screen
 
+TEXT_FONT_SIZE = 14
+ICON_FONT_SIZE = 17
 MOUSE_MOV_DIFF = 20
 ALT = "mod1"
 WIN = "mod4"
@@ -15,26 +17,15 @@ SHIFT = "shift"
 TERM = "kitty"
 HOME = os.path.expanduser("~")
 QTILE_DIR = HOME + "/.config/qtile"
-KEYBOARD_LAYOUT = "colemak"
 
 CUSTOM_KEYMAP = {
     "left": "h",
-    "right": "l",
-    "up": "k",
-    "down": "j",
-    "normal": "n",
-    "next_screen": "semicolon",
+    "right": "i",
+    "up": "e",
+    "down": "n",
+    "normal": "k",
+    "next_screen": "o",
 }
-
-if KEYBOARD_LAYOUT == "colemak":
-    CUSTOM_KEYMAP = {
-        "left": "h",
-        "right": "i",
-        "up": "e",
-        "down": "n",
-        "normal": "k",
-        "next_screen": "o",
-    }
 
 keys = [
     # The essentials
@@ -289,7 +280,7 @@ keys = [
     # Power control
     Key(
         [WIN],
-        "l",
+        "q",
         lazy.spawn("dm-tool lock"),
         desc="Lock screen",
     ),
@@ -301,106 +292,64 @@ keys = [
     ),
     # Mouse control
     Key(
-        [CONTROL],
-        "SPACE",
+        [ALT],
+        "semicolon",
         lazy.spawn("xdotool click 1"),
         desc="Move left click",
     ),
     Key(
-        [CONTROL, SHIFT],
-        "SPACE",
+        [ALT, SHIFT],
+        "semicolon",
         lazy.spawn("xdotool click 3"),
         desc="Move right click",
     ),
     Key(
         [ALT],
-        "l",
+        "j",
         lazy.spawn(f"xdotool mousemove_relative -- -{MOUSE_MOV_DIFF} 0"),
         desc="Move mouse left",
     ),
     Key(
         [ALT],
-        "u",
+        "l",
         lazy.spawn(f"xdotool mousemove_relative 0 {MOUSE_MOV_DIFF}"),
         desc="Move mouse up",
     ),
     Key(
         [ALT],
-        "y",
+        "u",
         lazy.spawn(f"xdotool mousemove_relative 0 -{MOUSE_MOV_DIFF}"),
         desc="Move mouse down",
     ),
     Key(
         [ALT],
-        "semicolon",
+        "y",
         lazy.spawn(f"xdotool mousemove_relative {MOUSE_MOV_DIFF} 0"),
         desc="Move mouse right",
     ),
 ]
 
-group_names = [
-    ("Javan", {"layout": "monadtall"}),
-    ("Kemuel", {"layout": "monadtall"}),
-    ("Laila", {"layout": "monadtall"}),
-    ("Seraphina", {"layout": "monadtall"}),
-    ("Uriel", {"layout": "monadtall"}),
-    ("Ieshim", {"layout": "monadtall"}),
-    ("Orifiel", {"layout": "monadtall"}),
-    ("Parisa", {"layout": "monadtall"}),
-]
-
 group_keys = {
-    "1": "j",
-    "2": "k",
-    "3": "l",
-    "4": "semicolon",
-    "5": "u",
-    "6": "i",
-    "7": "o",
-    "8": "p",
+    "1": "n",
+    "2": "e",
+    "3": "i",
+    "4": "o",
+    "5": "l",
+    "6": "u",
+    "7": "y",
+    "8": "semicolon",
 }
 
-if KEYBOARD_LAYOUT == "colemak":
-    group_keys = {
-        # "1": "a",
-        # "2": "r",
-        # "3": "s",
-        # "4": "t",
-        # "5": "q",
-        # "6": "w",
-        # "7": "f",
-        # "8": "p",
-
-        "1": "n",
-        "2": "e",
-        "3": "i",
-        "4": "o",
-        "5": "l",
-        "6": "u",
-        "7": "y",
-        "8": "semicolon",
-    }
-
-    group_names = [
-        # ("Azazel", {"layout": "monadtall"}),
-        # ("Rahab", {"layout": "monadtall"}),
-        # ("Samkiel", {"layout": "monadtall"}),
-        # ("Tagas", {"layout": "monadtall"}),
-        # ("Qaspiel", {"layout": "monadtall"}),
-        # ("Wormwood", {"layout": "monadtall"}),
-        # ("Furfur", {"layout": "monadtall"}),
-        # ("Purah", {"layout": "monadtall"}),
-
-        ("Nergal", {"layout": "monadtall"}),
-        ("Emma-O", {"layout": "monadtall"}),
-        ("Ishtar", {"layout": "monadtall"}),
-        ("O-Yama", {"layout": "monadtall"}),
-        ("Loki", {"layout": "monadtall"}),
-        ("Ukobach", {"layout": "monadtall"}),
-        ("Yaotzin", {"layout": "monadtall"}),
-        ("Purah", {"layout": "monadtall"}),
-
-    ]
+group_names = [
+    ("Nergal", {"layout": "monadtall"}),
+    ("Emma-O", {"layout": "monadtall"}),
+    ("Ishtar", {"layout": "monadtall"}),
+    ("O-Yama", {"layout": "monadtall"}),
+    ("Loki", {"layout": "monadtall"}),
+    ("Ukobach", {"layout": "monadtall"}),
+    ("Yaotzin", {"layout": "monadtall"}),
+    ("Purah", {"layout": "monadtall"}),
+]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
@@ -455,7 +404,7 @@ colors = [
 # DEFAULT WIDGET SETTINGS #####
 widget_defaults = {
     "font": "FiraCode Nerd Font Mono 12",
-    "fontsize": 16,
+    "fontsize": TEXT_FONT_SIZE,
     "padding": 5,
     "background": colors[6],
     "foreground": colors[2],
@@ -471,7 +420,7 @@ def init_widgets_list():
         # 1
         widget.TextBox(
             fmt="",
-            fontsize=23,
+            fontsize=ICON_FONT_SIZE,
             background=colors[0],
             foreground=colors[0],
             padding=0,
@@ -484,7 +433,7 @@ def init_widgets_list():
             inactive_color=colors[1],
             padding=1,
             background=colors[0],
-            fontsize=24,
+            fontsize=ICON_FONT_SIZE,
         ),
         # 3
         widget.Sep(
@@ -515,7 +464,7 @@ def init_widgets_list():
         # 5
         widget.TextBox(
             fmt="",
-            fontsize=23,
+            fontsize=ICON_FONT_SIZE,
             padding=0,
             foreground=colors[0],
             background=colors[1],
@@ -524,11 +473,11 @@ def init_widgets_list():
         widget.Spacer(
             length=bar.STRETCH,
             background=colors[1],
-            ),
+        ),
         # 7
         widget.TextBox(
             fmt="",
-            fontsize=23,
+            fontsize=ICON_FONT_SIZE,
             padding=0,
             background=colors[1],
             foreground=colors[0],
@@ -540,7 +489,7 @@ def init_widgets_list():
             foreground=colors[2],
             background=colors[0],
             use_bits=False,
-            update_interval=10,
+            update_interval=21,
         ),
         # 9
         widget.Battery(
@@ -548,7 +497,7 @@ def init_widgets_list():
             charge_char=" ",
             full_char=" ",
             unknown_char=" ",
-            update_interval=9,
+            update_interval=5,
             format="{char}{percent:2.0%} ",
             foreground=colors[2],
             background=colors[0],
@@ -556,7 +505,7 @@ def init_widgets_list():
         ),
         # 10
         widget.TextBox(
-            fontsize=23,
+            fontsize=ICON_FONT_SIZE,
             fmt="",
             foreground=colors[2],
             background=colors[0],
@@ -572,14 +521,14 @@ def init_widgets_list():
         # 12
         widget.TextBox(
             fmt=" ☀",
-            fontsize=20,
+            fontsize=ICON_FONT_SIZE,
             foreground=colors[2],
             background=colors[0],
             padding=0,
         ),
         # 13
         widget.Clock(
-            update_interval=60,
+            update_interval=61,
             format="%a,%H:%M(%d/%m)",
             foreground=colors[2],
             background=colors[0],
@@ -590,18 +539,18 @@ def init_widgets_list():
             format="{load_percent}%",
             foreground=colors[2],
             background=colors[0],
-            update_interval=8,
+            update_interval=13,
         ),
         widget.Memory(
             padding=0,
             measure_mem="G",
             foreground=colors[2],
             background=colors[0],
-            update_interval=7,
+            update_interval=11,
         ),
         widget.TextBox(
             fmt="  ",
-            fontsize=20,
+            fontsize=TEXT_FONT_SIZE,
             foreground=colors[2],
             background=colors[0],
             padding=0,
@@ -634,10 +583,10 @@ def init_screens():
     """Apply status bars."""
     return [
         Screen(
-            top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=28),
+            top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=22),
         ),
         Screen(
-            top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=28),
+            top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=22),
         ),
     ]
 
@@ -674,7 +623,9 @@ focus_on_window_activation = "smart"
 @hook.subscribe.startup_once
 def start_once():
     """Bootstrap qtile."""
-    subprocess.call([QTILE_DIR + "/autostart.sh"])
+    subprocess.call(["/usr/bin/ibus-daemon", "-d"])
+    subprocess.call(["/usr/bin/xfce4-power-manager", "--daemon"])
+    subprocess.call(["/usr/bin/xmodmap", "~/.config/xmodmap/xmodmap"])
 
 
 wmname = "LG3D"
