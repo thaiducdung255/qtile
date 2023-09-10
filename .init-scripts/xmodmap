@@ -1,4 +1,0 @@
-remove Lock = Delete
-add Lock = Escape
-keysym Delete = Escape
-keysym Escape = Delete
