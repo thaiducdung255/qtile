@@ -51,7 +51,7 @@ keys = [
     Key(
         [ALT],
         "b",
-        lazy.spawn("brave"),
+        lazy.spawn("qutebrowser"),
         desc="Start web browser",
     ),
     Key(
