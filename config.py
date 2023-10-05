@@ -14,9 +14,12 @@ ALT = "mod1"
 WIN = "mod4"
 CONTROL = "control"
 SHIFT = "shift"
-TERM = "kitty"
+TERM = "kitty --title=term"
 HOME = os.path.expanduser("~")
 QTILE_DIR = HOME + "/.config/qtile"
+WIN_TAB_SEP = " -|- "
+SELECTED_TAB_CSS = ("<b>[", "]</b>")
+FONT = "FiraCode Nerd Font Mono"
 
 CUSTOM_KEYMAP = {
     "left": "h",
@@ -26,6 +29,7 @@ CUSTOM_KEYMAP = {
     "normal": "k",
     "next_screen": "o",
 }
+
 
 keys = [
     # The essentials
@@ -56,13 +60,19 @@ keys = [
     ),
     Key(
         [ALT],
-        "space",
+        "f",
         lazy.next_layout(),
         desc="Toggle through layouts",
     ),
     Key(
         [ALT, SHIFT],
         CUSTOM_KEYMAP["next_screen"],
+        lazy.window.kill(),
+        desc="Kill active window",
+    ),
+    Key(
+        [ALT],
+        "q",
         lazy.window.kill(),
         desc="Kill active window",
     ),
@@ -86,27 +96,27 @@ keys = [
         desc="Move focus to next monitor",
     ),
     # Window controls
+    # Key(
+    #     [ALT],
+    #     CUSTOM_KEYMAP["left"],
+    #     lazy.function(next_win),
+    #     desc="Move focus left in current stack pane",
+    # ),
+    # Key(
+    #     [ALT],
+    #     CUSTOM_KEYMAP["right"],
+    #     lazy.layout.right(),
+    #     desc="Move focus right in current stack pane",
+    # ),
     Key(
         [ALT],
-        CUSTOM_KEYMAP["left"],
-        lazy.layout.left(),
-        desc="Move focus left in current stack pane",
-    ),
-    Key(
-        [ALT],
-        CUSTOM_KEYMAP["right"],
-        lazy.layout.right(),
-        desc="Move focus right in current stack pane",
-    ),
-    Key(
-        [ALT],
-        CUSTOM_KEYMAP["down"],
+        CUSTOM_KEYMAP["up"],
         lazy.layout.down(),
         desc="Move focus down in current stack pane",
     ),
     Key(
         [ALT],
-        CUSTOM_KEYMAP["up"],
+        CUSTOM_KEYMAP["down"],
         lazy.layout.up(),
         desc="Move focus up in current stack pane",
     ),
@@ -298,7 +308,7 @@ keys = [
         desc="Move left click",
     ),
     Key(
-        [ALT, SHIFT],
+        [ALT, CONTROL],
         "semicolon",
         lazy.spawn("xdotool click 3"),
         desc="Move right click",
@@ -327,6 +337,13 @@ keys = [
         lazy.spawn(f"xdotool mousemove_relative {MOUSE_MOV_DIFF} 0"),
         desc="Move mouse right",
     ),
+    # Keyboard layout control
+    Key(
+        [WIN],
+        "a",
+        lazy.spawn(QTILE_DIR + "/.init-scripts/keyboard-layout"),
+        desc="Switch keyboard layout",
+    ),
 ]
 
 group_keys = {
@@ -341,14 +358,14 @@ group_keys = {
 }
 
 group_names = [
-    ("Nergal", {"layout": "monadtall"}),
-    ("Emma-O", {"layout": "monadtall"}),
-    ("Ishtar", {"layout": "monadtall"}),
-    ("O-Yama", {"layout": "monadtall"}),
-    ("Loki", {"layout": "monadtall"}),
-    ("Ukobach", {"layout": "monadtall"}),
-    ("Yaotzin", {"layout": "monadtall"}),
-    ("Purah", {"layout": "monadtall"}),
+    ("Nergal", {"layout": "max"}),
+    ("Emma-O", {"layout": "max"}),
+    ("Ishtar", {"layout": "max"}),
+    ("O-Yama", {"layout": "max"}),
+    ("Loki", {"layout": "max"}),
+    ("Ukobach", {"layout": "max"}),
+    ("Yaotzin", {"layout": "max"}),
+    ("Purah", {"layout": "max"}),
 ]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
@@ -372,7 +389,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     )
 
 layout_theme = {
-    "border_width": 1,
+    "border_width": 0,
     "margin": 0,
     "border_focus": "white",
     "border_normal": "1D2330",
@@ -414,54 +431,65 @@ widget_defaults = {
 extension_defaults = widget_defaults.copy()
 
 
+def shorten_window_name(win_name_str):
+    raw_win_names = win_name_str.split(WIN_TAB_SEP)
+    win_names = []
+    win_name_sep = "-"
+    alter_win_name_sep = "|"
+    win_name_str = ""
+
+    for win_name in raw_win_names:
+        print(win_name)
+        win_name = win_name.split(win_name_sep)[-1]
+        win_name = win_name.split(alter_win_name_sep)[-1].lower().strip()
+
+        if SELECTED_TAB_CSS[1] in win_name:
+            win_name = SELECTED_TAB_CSS[0] + win_name
+
+        win_names.append(win_name)
+    return WIN_TAB_SEP.join(win_names)
+
+
 def init_widgets_list():
     """Status bar config."""
-    widgets = [
-        # 1
+    left_widgets = [
         widget.TextBox(
-            fmt="",
+            fmt=" ",
             fontsize=ICON_FONT_SIZE,
             background=colors[0],
             foreground=colors[0],
             padding=0,
         ),
-        # 2
         widget.CurrentScreen(
+            fontsize=ICON_FONT_SIZE,
             active_text="❇",
             active_color=colors[3],
             inactive_text="❇",
             inactive_color=colors[1],
             padding=1,
             background=colors[0],
-            fontsize=ICON_FONT_SIZE,
         ),
-        # 3
         widget.Sep(
             padding=5,
             background=colors[0],
             foreground=colors[0],
         ),
-        # 4
         widget.GroupBox(
             background=colors[0],
             margin_x=5,
             padding_y=2,
             padding_x=7,
             borderwidth=2,
-            disable_drag=True,
             active=colors[2],
             inactive=colors[3],
             rounded=True,
             hide_unused=True,
             highlight_color=colors[1],
-            highlight_method="border",
-            this_current_screen_border=colors[2],
-            this_screen_border=colors[4],
-            other_current_screen_border=colors[1],
-            other_screen_border=colors[1],
-            font="FiraCode Nerd Font Mono",
+            highlight_method="block",
+            block_highlight_text_color=colors[5],
+            mouse_callbacks={"Button1": lambda: None},
+            font=FONT,
         ),
-        # 5
         widget.TextBox(
             fmt="",
             fontsize=ICON_FONT_SIZE,
@@ -469,12 +497,14 @@ def init_widgets_list():
             foreground=colors[0],
             background=colors[1],
         ),
-        # 6
-        widget.Spacer(
-            length=bar.STRETCH,
+        widget.Sep(
+            padding=100,
             background=colors[1],
+            foreground=colors[1],
         ),
-        # 7
+    ]
+
+    mid_widgets = [
         widget.TextBox(
             fmt="",
             fontsize=ICON_FONT_SIZE,
@@ -482,78 +512,86 @@ def init_widgets_list():
             background=colors[1],
             foreground=colors[0],
         ),
-        # 8
+        widget.WindowTabs(
+            background=colors[0],
+            fmt="{}",
+            font=FONT,
+            padding=30,
+            max_chars=0,
+            mouse_callbacks={"Button1": lambda: None},
+            parse_text=shorten_window_name,
+            selected=SELECTED_TAB_CSS,
+            separator=WIN_TAB_SEP,
+        ),
+        widget.TextBox(
+            fmt="",
+            fontsize=ICON_FONT_SIZE,
+            padding=0,
+            foreground=colors[0],
+            background=colors[1],
+        ),
+        widget.Sep(
+            padding=100,
+            background=colors[1],
+            foreground=colors[1],
+        ),
+    ]
+
+    right_widgets = [
+        widget.TextBox(
+            fmt="",
+            fontsize=ICON_FONT_SIZE,
+            padding=0,
+            background=colors[1],
+            foreground=colors[0],
+        ),
+        widget.Battery(
+            fontsize=TEXT_FONT_SIZE,
+            discharge_char="  ",
+            charge_char="  ",
+            full_char="  ",
+            unknown_char="  ",
+            update_interval=5,
+            format="{char}{percent:2.0%}",
+            foreground=colors[2],
+            background=colors[0],
+        ),
         widget.Net(
-            format="{down}/{up} ",
-            padding=10,
+            fontsize=TEXT_FONT_SIZE,
+            format="{down}",
             foreground=colors[2],
             background=colors[0],
             use_bits=False,
             update_interval=21,
         ),
-        # 9
-        widget.Battery(
-            discharge_char=" ",
-            charge_char=" ",
-            full_char=" ",
-            unknown_char=" ",
-            update_interval=5,
-            format="{char}{percent:2.0%} ",
-            foreground=colors[2],
-            background=colors[0],
-            padding=10,
-        ),
-        # 10
-        widget.TextBox(
-            fontsize=ICON_FONT_SIZE,
-            fmt="",
-            foreground=colors[2],
-            background=colors[0],
-            padding=0,
-        ),
-        # 11
         widget.Volume(
+            fmt="󰂚 {}",
             channel="Master",
             foreground=colors[2],
             background=colors[0],
+            mouse_callbacks={"Button1": lambda: None},
+            update_interval=0.5,
             padding=10,
         ),
-        # 12
-        widget.TextBox(
-            fmt=" ☀",
-            fontsize=ICON_FONT_SIZE,
-            foreground=colors[2],
-            background=colors[0],
-            padding=0,
-        ),
-        # 13
         widget.Clock(
-            update_interval=61,
-            format="%a,%H:%M(%d/%m)",
-            foreground=colors[2],
-            background=colors[0],
-            padding=4,
-        ),
-        widget.CPU(
-            padding=10,
-            format="{load_percent}%",
-            foreground=colors[2],
-            background=colors[0],
-            update_interval=13,
-        ),
-        widget.Memory(
-            padding=0,
-            measure_mem="G",
-            foreground=colors[2],
-            background=colors[0],
-            update_interval=11,
-        ),
-        widget.TextBox(
-            fmt="  ",
             fontsize=TEXT_FONT_SIZE,
+            update_interval=61,
+            format="%a %m-%d %H:%M",
             foreground=colors[2],
             background=colors[0],
-            padding=0,
+            padding=10,
+        ),
+        widget.KeyboardLayout(
+            fontsize=23,
+            configured_keyboards=[
+                "us colemak",
+                "us intl",
+            ],
+            display_map={
+                "us colemak": "󰢚",
+                "us intl": "󰙃",
+            },
+            mouse_callbacks={"Button1": lambda: None},
         ),
     ]
 
@@ -562,9 +600,15 @@ def init_widgets_list():
     check_batt_output = check_batt_cmd.read()
 
     if len(check_batt_output) == 0:
-        widgets.pop(8)
+        right_widgets[2] = (
+            widget.Sep(
+                padding=10,
+                background=colors[1],
+                foreground=colors[1],
+            ),
+        )
 
-    return widgets
+    return left_widgets + mid_widgets + right_widgets
 
 
 def init_widgets_screen1():
@@ -625,7 +669,7 @@ def start_once():
     """Bootstrap qtile."""
     subprocess.call(["/usr/bin/ibus-daemon", "-d"])
     subprocess.call(["/usr/bin/xfce4-power-manager", "--daemon"])
-    subprocess.call(["/usr/bin/xmodmap", HOME + "/.config/xmodmap/xmodmap"])
+    subprocess.call(["/usr/bin/xmodmap", HOME + "/.config/xmodmap/colemak"])
 
 
 wmname = "LG3D"
