@@ -668,6 +668,7 @@ focus_on_window_activation = "smart"
 def start_once():
     """Bootstrap qtile."""
     subprocess.call(["/usr/bin/ibus-daemon", "-d"])
+    subprocess.call(["/usr/bin/xinput", "disable", "12"])
     subprocess.call(["/usr/bin/xfce4-power-manager", "--daemon"])
     subprocess.call(["/usr/bin/xmodmap", HOME + "/.config/xmodmap/colemak"])
 
