@@ -9,7 +9,7 @@ install-screenshot:
 	sudo ln -fs ${HOME}/.config/qtile/.init-scripts/screenshot-all.sh /usr/bin/screenshot-all
 
 install-deps:
-	sudo pacman -S --noconfirm rofi git-delta qtile kitty alsa-utils python-iwlib python-psutil xcb-util-cursor xclip xorg-xev yay qutebrowser
+	sudo pacman -S --noconfirm rofi git-delta qtile kitty alsa-utils python-iwlib python-psutil xcb-util-cursor xclip xorg-xev qutebrowser xfce4-power-manager xdotool
 
 install-sounds:
 	sudo pacman -S --noconfirm  pavucontrol bluez bluez-utils blueman pipewire pipewire-audio pipewire-pulse
