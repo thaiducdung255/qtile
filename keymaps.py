@@ -137,9 +137,8 @@ keys = [
     ),
     Key(
         [ALT, SHIFT],
-        "h",
+        "i",
         lazy.layout.swap_right(),
-        lazy.layout.left(),
         desc="Move windows right in current stack",
     ),
     Key(
@@ -369,6 +368,6 @@ for i, (name, kwargs) in enumerate(group_names, 1):
             [WIN, CONTROL],
             group_keys[str(i)],
             lazy.window.togroup(name),
-            # lazy.group[name].toscreen()
+            lazy.restart(),
         )
     )
