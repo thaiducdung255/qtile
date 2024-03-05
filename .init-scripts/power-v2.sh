@@ -3,7 +3,7 @@ res=$(echo -e "Shutdown\nRestart" | rofi -dmenu -i -p "Power: ")
 
 case $res in
    Shutdown)
-      shutdown now
+      shutdown -h now
    ;;
 
    Restart)
